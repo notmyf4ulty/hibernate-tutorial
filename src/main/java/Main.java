@@ -3,6 +3,7 @@ import domain.Employee;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.math.BigDecimal;
 
 /**
  * Created by przemek on 20.08.16.
@@ -18,12 +19,14 @@ public class Main {
         employee.setFirstName("Piotr");
         employee.setLastName("Kowalski");
         employee.setSalary(2222.2);
+        employee.setSalary2(new BigDecimal(1234.3));
 
         Employee employee2 = new Employee();
 //        employee.setId(1L);
         employee2.setFirstName("Jan");
         employee2.setLastName("Rosiak");
         employee2.setSalary(4444.4);
+        employee2.setSalary2(new BigDecimal(4323.3));
 
 
 
