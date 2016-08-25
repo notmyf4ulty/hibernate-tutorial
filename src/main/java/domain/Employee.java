@@ -1,12 +1,16 @@
 package domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+// @Entity annotation forces Hibernate to create tables in the connected database
+// which will consist of the class' fields
 @Entity
 public class Employee {
-    
+
     @Id
+    @GeneratedValue
     private long id;
     private String firstName;
     private String lastName;

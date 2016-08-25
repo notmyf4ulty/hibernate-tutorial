@@ -14,15 +14,24 @@ public class Main {
 
         // Database object creation
         Employee employee = new Employee();
-        employee.setId(1L);
-        employee.setFirstName("Jan");
+//        employee.setId(1L);
+        employee.setFirstName("Piotr");
         employee.setLastName("Kowalski");
-        employee.setSalary(3333.3);
+        employee.setSalary(2222.2);
+
+        Employee employee2 = new Employee();
+//        employee.setId(1L);
+        employee2.setFirstName("Jan");
+        employee2.setLastName("Rosiak");
+        employee2.setSalary(4444.4);
+
+
 
         // Starting transaction
         entityManager.getTransaction().begin();
         // "Sending" new Employee object to the database
         entityManager.persist(employee);
+        entityManager.persist(employee2);
         // Closing (commiting) transaction
         entityManager.getTransaction().commit();
 
