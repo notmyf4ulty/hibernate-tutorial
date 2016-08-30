@@ -1,4 +1,4 @@
-package com.catnbear;
+package org.jpwh.model.helloworld;
 
 public class Main {
     public static void main (String [] args) {
