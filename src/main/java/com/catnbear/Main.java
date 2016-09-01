@@ -4,8 +4,8 @@ import com.catnbear.database.Budget;
 import com.catnbear.database.DatabaseConnector;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
+import java.util.Date;
 
 public class Main {
 
@@ -14,14 +14,13 @@ public class Main {
         DatabaseConnector connector = DatabaseConnector.getInstance();
         Connection connection = connector.getConnection();
         ResultSet resultSet = null;
+        Vector<Budget> budgetVector = new Vector<Budget>();
         try {
             Statement statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT * FROM wimm.notmyf4ulty_budget;");
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
             System.out.println(Budget.validateTable(resultSetMetaData));
 
-            int columnCount = resultSetMetaData.getColumnCount();
-            Vector<Budget> budgetVector = new Vector<Budget>();
             while (resultSet.next()) {
                 budgetVector.add(new Budget(resultSet));
             }
@@ -31,6 +30,7 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
 
     }
