@@ -1,8 +1,10 @@
 package com.catnbear;
 
+import com.catnbear.database.Budget;
 import com.catnbear.database.DatabaseConnector;
 
 import java.sql.*;
+import java.util.List;
 
 public class Main {
 
@@ -15,7 +17,10 @@ public class Main {
             Statement statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT * FROM wimm.notmyf4ulty_budget;");
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+            System.out.println(Budget.validateTable(resultSetMetaData));
+
             int columnCount = resultSetMetaData.getColumnCount();
+//            List<String>
             while (resultSet.next()) {
                 for (int i = 1 ; i <= columnCount ; i++) {
                     System.out.print(resultSet.getString(i) + " ");
