@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Button?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
+    <ListView fx:id="listView"/>
+    <Button text="HI" onAction="#onButtonAction"/>
+</StackPane>
