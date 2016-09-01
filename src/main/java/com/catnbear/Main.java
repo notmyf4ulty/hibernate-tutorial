@@ -22,10 +22,8 @@ public class Main {
             int columnCount = resultSetMetaData.getColumnCount();
 //            List<String>
             while (resultSet.next()) {
-                for (int i = 1 ; i <= columnCount ; i++) {
-                    System.out.print(resultSet.getString(i) + " ");
-                }
-                System.out.println();
+                Budget budgetObject = new Budget(resultSet);
+                System.out.println(budgetObject);
             }
         } catch (SQLException e) {
             e.printStackTrace();

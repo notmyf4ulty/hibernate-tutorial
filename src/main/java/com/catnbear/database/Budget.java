@@ -12,13 +12,13 @@ public class Budget {
 
     public static final int BUDGET_COLUMN_NUMBER = 8;
 
-    public static enum TableValidator {
+    public enum TableValidator {
         TABLE_VALID("TABLE_VALID"),
         TABLE_INVALID("TABLE_INVALID");
 
         private final String fieldDescription;
 
-        private TableValidator(String value) {
+        TableValidator(String value) {
             fieldDescription = value;
         }
 
@@ -37,6 +37,15 @@ public class Budget {
         "amount"
     };
 
+    private final int ID_COLUMN_INDEX = 1;
+    private final int DATE_COLUMN_INDEX = 2;
+    private final int COUNTERPARTY_COLUMN_INDEX = 3;
+    private final int CATEGORY_COLUMN_INDEX = 4;
+    private final int SUBCATEGORY_COLUMN_INDEX = 5;
+    private final int DESCRIPTION_COLUMN_INDEX = 6;
+    private final int TYPE_COLUMN_INDEX = 7;
+    private final int AMOUNT_COLUMN_INDEX = 8;
+
     private long id;
     private Date date;
     private String counterParty;
@@ -45,6 +54,23 @@ public class Budget {
     private String description;
     private String type;
     private double amount;
+
+    public Budget(ResultSet resultSet) throws SQLException {
+        if (validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
+            id = resultSet.getInt(ID_COLUMN_INDEX);
+            date = resultSet.getDate(DATE_COLUMN_INDEX);
+            counterParty = resultSet.getString(COUNTERPARTY_COLUMN_INDEX);
+            category = resultSet.getString(CATEGORY_COLUMN_INDEX);
+            subcategory = resultSet.getString(SUBCATEGORY_COLUMN_INDEX);
+            description = resultSet.getString(DESCRIPTION_COLUMN_INDEX);
+            type = resultSet.getString(TYPE_COLUMN_INDEX);
+            amount = resultSet.getDouble(AMOUNT_COLUMN_INDEX);
+        }
+        else {
+            System.out.println("En error occured during creation of the Budget object.");
+        }
+    }
+
 
     public static TableValidator validateTable(ResultSetMetaData resultSetMetaData) throws SQLException {
         if (resultSetMetaData.getColumnCount() != BUDGET_COLUMN_NUMBER) {
@@ -56,6 +82,18 @@ public class Budget {
             }
         }
         return TableValidator.TABLE_VALID;
+    }
+
+    public String toString() {
+        return
+                id + " " +
+                date + " " +
+                counterParty + " " +
+                category + " " +
+                subcategory + " " +
+                description + " " +
+                type + " " +
+                amount;
     }
 
     public long getId() {
