@@ -5,6 +5,7 @@ import com.catnbear.database.DatabaseConnector;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Vector;
 
 public class Main {
 
@@ -20,11 +21,13 @@ public class Main {
             System.out.println(Budget.validateTable(resultSetMetaData));
 
             int columnCount = resultSetMetaData.getColumnCount();
-//            List<String>
+            Vector<Budget> budgetVector = new Vector<Budget>();
             while (resultSet.next()) {
-                Budget budgetObject = new Budget(resultSet);
-                System.out.println(budgetObject);
+                budgetVector.add(new Budget(resultSet));
             }
+            for (Budget i : budgetVector) {
+                System.out.println(i);
+            };
         } catch (SQLException e) {
             e.printStackTrace();
         }
