@@ -1,9 +1,10 @@
 package com.catnbear.database;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Date;
 
 /**
  * Created by przemek on 01.09.16.
@@ -46,25 +47,25 @@ public class Budget {
     private final int TYPE_COLUMN_INDEX = 7;
     private final int AMOUNT_COLUMN_INDEX = 8;
 
-    private long id;
-    private Date date;
-    private String counterParty;
-    private String category;
-    private String subcategory;
-    private String description;
-    private String type;
-    private double amount;
+    private final SimpleStringProperty id = new SimpleStringProperty("");
+    private final SimpleStringProperty date = new SimpleStringProperty("");
+    private final SimpleStringProperty  counterParty = new SimpleStringProperty("");
+    private final SimpleStringProperty  category = new SimpleStringProperty("");
+    private final SimpleStringProperty  subcategory = new SimpleStringProperty("");
+    private final SimpleStringProperty  description = new SimpleStringProperty("");
+    private final SimpleStringProperty  type = new SimpleStringProperty("");
+    private final SimpleStringProperty  amount = new SimpleStringProperty("");
 
     public Budget(ResultSet resultSet) throws SQLException {
         if (validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
-            id = resultSet.getInt(ID_COLUMN_INDEX);
-            date = resultSet.getDate(DATE_COLUMN_INDEX);
-            counterParty = resultSet.getString(COUNTERPARTY_COLUMN_INDEX);
-            category = resultSet.getString(CATEGORY_COLUMN_INDEX);
-            subcategory = resultSet.getString(SUBCATEGORY_COLUMN_INDEX);
-            description = resultSet.getString(DESCRIPTION_COLUMN_INDEX);
-            type = resultSet.getString(TYPE_COLUMN_INDEX);
-            amount = resultSet.getDouble(AMOUNT_COLUMN_INDEX);
+            id.set(resultSet.getString(ID_COLUMN_INDEX));
+            date.set(resultSet.getString(DATE_COLUMN_INDEX));
+            counterParty.set(resultSet.getString(COUNTERPARTY_COLUMN_INDEX));
+            category.set(resultSet.getString(CATEGORY_COLUMN_INDEX));
+            subcategory.set(resultSet.getString(SUBCATEGORY_COLUMN_INDEX));
+            description.set(resultSet.getString(DESCRIPTION_COLUMN_INDEX));
+            type.set(resultSet.getString(TYPE_COLUMN_INDEX));
+            amount.set(resultSet.getString(AMOUNT_COLUMN_INDEX));
         }
         else {
             System.out.println("En error occured during creation of the Budget object.");
@@ -96,67 +97,99 @@ public class Budget {
                 amount;
     }
 
-    public long getId() {
+    public String getId() {
+        return id.get();
+    }
+
+    public SimpleStringProperty idProperty() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id.set(id);
     }
 
-    public Date getDate() {
+    public String getDate() {
+        return date.get();
+    }
+
+    public SimpleStringProperty dateProperty() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String date) {
+        this.date.set(date);
     }
 
     public String getCounterParty() {
+        return counterParty.get();
+    }
+
+    public SimpleStringProperty counterPartyProperty() {
         return counterParty;
     }
 
     public void setCounterParty(String counterParty) {
-        this.counterParty = counterParty;
+        this.counterParty.set(counterParty);
     }
 
     public String getCategory() {
+        return category.get();
+    }
+
+    public SimpleStringProperty categoryProperty() {
         return category;
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        this.category.set(category);
     }
 
     public String getSubcategory() {
+        return subcategory.get();
+    }
+
+    public SimpleStringProperty subcategoryProperty() {
         return subcategory;
     }
 
     public void setSubcategory(String subcategory) {
-        this.subcategory = subcategory;
+        this.subcategory.set(subcategory);
     }
 
     public String getDescription() {
+        return description.get();
+    }
+
+    public SimpleStringProperty descriptionProperty() {
         return description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description.set(description);
     }
 
     public String getType() {
+        return type.get();
+    }
+
+    public SimpleStringProperty typeProperty() {
         return type;
     }
 
     public void setType(String type) {
-        this.type = type;
+        this.type.set(type);
     }
 
-    public double getAmount() {
+    public String getAmount() {
+        return amount.get();
+    }
+
+    public SimpleStringProperty amountProperty() {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setAmount(String amount) {
+        this.amount.set(amount);
     }
 }

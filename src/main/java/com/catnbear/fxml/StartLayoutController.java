@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Vector;
  * Created by przemek on 01.09.16.
  */
 public class StartLayoutController {
-    @FXML private ListView listView;
+    @FXML private TableView tableView;
 
     @FXML private void onButtonAction() {
         DatabaseConnector connector = DatabaseConnector.getInstance();
@@ -38,14 +39,6 @@ public class StartLayoutController {
             e.printStackTrace();
         }
         ObservableList<Budget> list = FXCollections.observableArrayList(new ArrayList<Budget>(budgetVector));
-        listView.setItems(list);
-    }
-
-    public ListView getListView() {
-        return listView;
-    }
-
-    public void setListView(ListView listView) {
-        this.listView = listView;
+        tableView.setItems(list);
     }
 }
