@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Button?>
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
-    <ListView fx:id="listView"/>
-    <Button text="HI" onAction="#onButtonAction"/>
-</StackPane>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
+    <TableView fx:id="tableView">
+        <columns>
+            <TableColumn text="Id"/>
+            <TableColumn text="date"/>
+            <TableColumn text="Counterparty"/>
+            <TableColumn text="Category"/>
+            <TableColumn text="Subcategory"/>
+            <TableColumn text="Description"/>
+            <TableColumn text="Type"/>
+        </columns>
+    </TableView>
+    <Button text="Hi" onAction="#onButtonAction"/>
+</VBox>

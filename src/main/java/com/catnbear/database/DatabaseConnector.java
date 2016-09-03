@@ -32,9 +32,7 @@ public class DatabaseConnector {
             e.printStackTrace();
         }
 
-        if (connection != null) {
-            System.out.println("You made it, take control your database now!");
-        } else {
+        if (connection == null) {
             System.out.println("Failed to make connection!");
         }
 
