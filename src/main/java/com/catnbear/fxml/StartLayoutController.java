@@ -5,7 +5,6 @@ import com.catnbear.database.DatabaseConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 
 import java.sql.*;
@@ -40,5 +39,27 @@ public class StartLayoutController {
         }
         ObservableList<Budget> list = FXCollections.observableArrayList(new ArrayList<Budget>(budgetVector));
         tableView.setItems(list);
+        System.out.println(budgetVector.get(1).toQuery());
+    }
+
+    @FXML private void addButtonClicked() {
+        Budget budget = new Budget();
+        budget.setDate("2012-08-21");
+        budget.setCounterParty("Kiciaczek");
+        budget.setCategory("Rzeczy");
+        budget.setSubcategory("Podrzeczy");
+        budget.setDescription("Opis");
+        budget.setType("Typ");
+        budget.setAmount("20");
+
+        DatabaseConnector connector = DatabaseConnector.getInstance();
+        Connection connection = connector.getConnection();
+
+        try {
+            System.out.println(budget.toQuery());
+            connection.createStatement().executeUpdate(budget.toQuery());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

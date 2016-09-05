@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class Budget {
 
-    public static final int BUDGET_COLUMN_NUMBER = 8;
+    public static final int BUDGET_COLUMN_AMOUNT = 8;
 
     public enum TableValidator {
         TABLE_VALID("TABLE_VALID"),
@@ -49,12 +49,14 @@ public class Budget {
 
     private final SimpleStringProperty id = new SimpleStringProperty("");
     private final SimpleStringProperty date = new SimpleStringProperty("");
-    private final SimpleStringProperty  counterParty = new SimpleStringProperty("");
-    private final SimpleStringProperty  category = new SimpleStringProperty("");
-    private final SimpleStringProperty  subcategory = new SimpleStringProperty("");
-    private final SimpleStringProperty  description = new SimpleStringProperty("");
-    private final SimpleStringProperty  type = new SimpleStringProperty("");
-    private final SimpleStringProperty  amount = new SimpleStringProperty("");
+    private final SimpleStringProperty counterParty = new SimpleStringProperty("");
+    private final SimpleStringProperty category = new SimpleStringProperty("");
+    private final SimpleStringProperty subcategory = new SimpleStringProperty("");
+    private final SimpleStringProperty description = new SimpleStringProperty("");
+    private final SimpleStringProperty type = new SimpleStringProperty("");
+    private final SimpleStringProperty amount = new SimpleStringProperty("");
+
+    public Budget() {}
 
     public Budget(ResultSet resultSet) throws SQLException {
         if (validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
@@ -72,11 +74,30 @@ public class Budget {
         }
     }
 
+    public String toQuery() {
+        return "INSERT INTO wimm.notmyf4ulty_budget (" +
+                TABLE_COLUMNS_NAMES[DATE_COLUMN_INDEX-1] + "," +
+                TABLE_COLUMNS_NAMES[COUNTERPARTY_COLUMN_INDEX-1] + "," +
+                TABLE_COLUMNS_NAMES[CATEGORY_COLUMN_INDEX-1] + "," +
+                TABLE_COLUMNS_NAMES[SUBCATEGORY_COLUMN_INDEX-1] + "," +
+                TABLE_COLUMNS_NAMES[DESCRIPTION_COLUMN_INDEX-1] + "," +
+                TABLE_COLUMNS_NAMES[TYPE_COLUMN_INDEX-1] + "," +
+                TABLE_COLUMNS_NAMES[AMOUNT_COLUMN_INDEX-1] + ")" +
+                " VALUES " + "(" +
+                "str_to_date(" + date.getValue() + ",'%Y-%m-%d')" + "," +
+                "\"" + counterParty.getValue() + "\"" + "," +
+                "\"" + category.getValue() +"\"" +  "," +
+                "\"" + subcategory.getValue() +"\"" +  "," +
+                "\"" + description.getValue() +"\"" +  "," +
+                "\"" + type.getValue() +"\"" +  "," +
+                "\"" + amount.getValue() +"\"" +  ");";
+    }
+
     public static TableValidator validateTable(ResultSetMetaData resultSetMetaData) throws SQLException {
-        if (resultSetMetaData.getColumnCount() != BUDGET_COLUMN_NUMBER) {
+        if (resultSetMetaData.getColumnCount() != BUDGET_COLUMN_AMOUNT) {
             return TableValidator.TABLE_INVALID;
         }
-        for (int columnIndex = 1 ; columnIndex <= BUDGET_COLUMN_NUMBER ; columnIndex++) {
+        for (int columnIndex = 1; columnIndex <= BUDGET_COLUMN_AMOUNT; columnIndex++) {
             if (!resultSetMetaData.getColumnName(columnIndex).equals(TABLE_COLUMNS_NAMES[columnIndex - 1])) {
                 return TableValidator.TABLE_INVALID;
             }
