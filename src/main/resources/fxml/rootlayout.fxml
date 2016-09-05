@@ -2,6 +2,9 @@
 
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.layout.HBox?>
 <StackPane xmlns:fx="http://javafx.com/fxml">
-    <fx:include source="startlayout.fxml"/>
+    <HBox>
+        <fx:include source="startlayout.fxml"/>
+    </HBox>
 </StackPane>
