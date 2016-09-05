@@ -72,7 +72,6 @@ public class Budget {
         }
     }
 
-
     public static TableValidator validateTable(ResultSetMetaData resultSetMetaData) throws SQLException {
         if (resultSetMetaData.getColumnCount() != BUDGET_COLUMN_NUMBER) {
             return TableValidator.TABLE_INVALID;

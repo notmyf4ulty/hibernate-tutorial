@@ -25,7 +25,10 @@ public class DatabaseConnector {
         Connection connection = null;
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306", "tutorial", "password");
+                    .getConnection(
+                            "jdbc:mysql://localhost:3306?zeroDateTimeBehavior=convertToNull",
+                            "tutorial",
+                            "password");
 
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
