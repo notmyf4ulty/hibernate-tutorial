@@ -1,19 +1,13 @@
 package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
-import com.catnbear.database.DatabaseConnector;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
-
 import java.sql.*;
-import java.util.Vector;
 
-/**
- * Created by przemek on 01.09.16.
- */
 public class StartLayoutController {
-    @FXML private TableView tableView;
+    @FXML private TableView<Budget> tableView;
 
     @FXML private void onButtonAction() {
         try {
