@@ -34,14 +34,6 @@ public class StartLayoutController {
         budget.setType("Typ");
         budget.setAmount("20");
 
-        DatabaseConnector connector = DatabaseConnector.getInstance();
-        Connection connection = connector.getConnection();
-
-        try {
-            System.out.println(budget.toQuery());
-            connection.createStatement().executeUpdate(budget.toQuery());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        budget.queryUpdate();
     }
 }

@@ -109,10 +109,11 @@ public class Budget {
     }
 
     public static ObservableList<Budget> queryResultToObservableList(String query) throws SQLException {
-        DatabaseConnector connector = DatabaseConnector.getInstance();
-        Connection connection = connector.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        ResultSet resultSet = DatabaseConnector
+                .getInstance()
+                .getConnection()
+                .createStatement()
+                .executeQuery(query);
         Vector<Budget> budgetVector = new Vector<Budget>();
 
         if(validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
@@ -122,6 +123,18 @@ public class Budget {
         }
         ObservableList<Budget> list = FXCollections.observableArrayList(new ArrayList<Budget>(budgetVector));
         return list;
+    }
+
+    public void queryUpdate() {
+        try {
+            DatabaseConnector
+                    .getInstance()
+                    .getConnection()
+                    .createStatement()
+                    .executeUpdate(toQuery());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String toString() {
