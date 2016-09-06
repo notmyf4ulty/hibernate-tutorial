@@ -1,13 +1,16 @@
 package com.catnbear.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+
+import java.sql.*;
+import java.util.Vector;
 
 public class DatabaseConnector {
 
     private static DatabaseConnector instance = null;
     private Connection connection;
+    private ResultSet resultSet;
 
     private DatabaseConnector() {
         connection = establishConnection();

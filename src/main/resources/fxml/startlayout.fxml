@@ -13,7 +13,7 @@
                     <PropertyValueFactory property="id"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="date">
+            <TableColumn text="Date">
                 <cellValueFactory>
                     <PropertyValueFactory property="date"/>
                 </cellValueFactory>

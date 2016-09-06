@@ -1,10 +1,13 @@
 package com.catnbear.database;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by przemek on 01.09.16.
@@ -103,6 +106,22 @@ public class Budget {
             }
         }
         return TableValidator.TABLE_VALID;
+    }
+
+    public static ObservableList<Budget> queryResultToObservableList(String query) throws SQLException {
+        DatabaseConnector connector = DatabaseConnector.getInstance();
+        Connection connection = connector.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        Vector<Budget> budgetVector = new Vector<Budget>();
+
+        if(validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
+            while (resultSet.next()) {
+                budgetVector.add(new Budget(resultSet));
+            }
+        }
+        ObservableList<Budget> list = FXCollections.observableArrayList(new ArrayList<Budget>(budgetVector));
+        return list;
     }
 
     public String toString() {
