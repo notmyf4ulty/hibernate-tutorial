@@ -45,10 +45,14 @@
                     <PropertyValueFactory property="type"/>
                 </cellValueFactory>
             </TableColumn>
+            <TableColumn text="Amount">
+                <cellValueFactory>
+                    <PropertyValueFactory property="amount"/>
+                </cellValueFactory>
+            </TableColumn>
         </columns>
     </TableView>
     <HBox fx:id="addBudgetBox">
-        <TextField fx:id="idTextField"/>
         <TextField fx:id="dateTextField"/>
         <TextField fx:id="counterPartyTextField"/>
         <TextField fx:id="categoryTextField"/>

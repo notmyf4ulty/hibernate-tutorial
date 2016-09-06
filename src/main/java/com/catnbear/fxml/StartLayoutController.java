@@ -4,10 +4,19 @@ import com.catnbear.database.Budget;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+
 import java.sql.*;
 
 public class StartLayoutController {
     @FXML private TableView<Budget> tableView;
+    @FXML private TextField dateTextField;
+    @FXML private TextField counterPartyTextField;
+    @FXML private TextField categoryTextField;
+    @FXML private TextField subcategoryTextField;
+    @FXML private TextField descriptionTextField;
+    @FXML private TextField typeTextField;
+    @FXML private TextField amountTextField;
 
     @FXML private void onButtonAction() {
         try {
@@ -20,13 +29,13 @@ public class StartLayoutController {
 
     @FXML private void addButtonClicked() {
         Budget budget = new Budget();
-        budget.setDate("2012-08-21");
-        budget.setCounterParty("Kiciaczek");
-        budget.setCategory("Rzeczy");
-        budget.setSubcategory("Podrzeczy");
-        budget.setDescription("Opis");
-        budget.setType("Typ");
-        budget.setAmount("20");
+        budget.setDate(dateTextField.getText());
+        budget.setCounterParty(counterPartyTextField.getText());
+        budget.setCategory(categoryTextField.getText());
+        budget.setSubcategory(subcategoryTextField.getText());
+        budget.setDescription(descriptionTextField.getText());
+        budget.setType(typeTextField.getText());
+        budget.setAmount(amountTextField.getText());
 
         budget.queryUpdate();
     }
