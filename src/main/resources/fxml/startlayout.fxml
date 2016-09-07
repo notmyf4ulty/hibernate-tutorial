@@ -7,52 +7,55 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextField?>
-<VBox fx:id="mainPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
-    <TableView fx:id="tableView">
-        <columns>
-            <TableColumn text="Id">
-                <cellValueFactory>
-                    <PropertyValueFactory property="id"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Date">
-                <cellValueFactory>
-                    <PropertyValueFactory property="date"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Counterparty">
-                <cellValueFactory>
-                    <PropertyValueFactory property="counterParty"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Category">
-                <cellValueFactory>
-                    <PropertyValueFactory property="category"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Subcategory">
-                <cellValueFactory>
-                    <PropertyValueFactory property="subcategory"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Description">
-                <cellValueFactory>
-                    <PropertyValueFactory property="description"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Type">
-                <cellValueFactory>
-                    <PropertyValueFactory property="type"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Amount">
-                <cellValueFactory>
-                    <PropertyValueFactory property="amount"/>
-                </cellValueFactory>
-            </TableColumn>
-        </columns>
-    </TableView>
-    <!--<fx:include source="addbudgetbox.fxml" fx:id="addBudgetBox"/>-->
-    <Button text="Hi" onAction="#onButtonAction"/>
-    <Button text="Add" onAction="#addButtonClicked"/>
-</VBox>
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
+    <VBox fx:id="mainPane" >
+        <TableView fx:id="tableView">
+            <columns>
+                <TableColumn text="Id">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Date">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="date"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Counterparty">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="counterParty"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Category">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="category"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Subcategory">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="subcategory"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Description">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="description"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Type">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="type"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Amount">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="amount"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <!--<fx:include source="addbudgetbox.fxml" fx:id="addBudgetBox"/>-->
+        <Button text="Hi" onAction="#onButtonAction"/>
+        <Button text="Add" onAction="#addButtonClicked"/>
+    </VBox>
+    <fx:include source="filters.fxml"/>
+</HBox>

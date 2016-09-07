@@ -7,6 +7,8 @@ import javafx.scene.control.TableView;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
 /**

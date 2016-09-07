@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Button?>
+<VBox fx:id="filterBox" xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.FiltersController">
+    <Button onAction="#yearChoiceBoxChosen"/>
+    <ChoiceBox fx:id="yearChoiceBox"/>
+    <ChoiceBox fx:id="monthChoiceBox" onAction="#monthChoiceBoxChosen"/>
+    <ChoiceBox fx:id="categoryChoiceBox" onAction="#categoryChoiceBoxChosen"/>
+</VBox>

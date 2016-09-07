@@ -1,12 +1,14 @@
 package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
+import com.catnbear.database.DataStuff;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -15,17 +17,21 @@ import java.sql.*;
 
 public class StartLayoutController {
     @FXML private TableView<Budget> tableView;
-    @FXML private Pane addBudgetBox;
     @FXML private VBox mainPane;
     private static boolean wasAddButtonClickedBefore = false;
+    ObservableList<Budget> budgetList;
+
+    public TableView<Budget> getTableView() {
+        return tableView;
+    }
 
     @FXML private void onButtonAction() {
         try {
-            ObservableList<Budget> list = Budget.queryResultToObservableList("SELECT * FROM wimm.notmyf4ulty_budget;");
-            tableView.setItems(list);
+            budgetList = DataStuff.getInstance().getBudgetList();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        tableView.setItems(budgetList);
     }
 
     @FXML private void addButtonClicked() {
@@ -40,7 +46,6 @@ public class StartLayoutController {
             }
         } else {
             mainPane.getChildren().remove(getChildOfId(mainPane,"addBudgetBox"));
-
         }
     }
 
