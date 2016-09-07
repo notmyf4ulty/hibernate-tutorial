@@ -7,7 +7,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextField?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
+<VBox fx:id="mainPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
     <TableView fx:id="tableView">
         <columns>
             <TableColumn text="Id">
@@ -52,15 +52,7 @@
             </TableColumn>
         </columns>
     </TableView>
-    <HBox fx:id="addBudgetBox">
-        <TextField fx:id="dateTextField"/>
-        <TextField fx:id="counterPartyTextField"/>
-        <TextField fx:id="categoryTextField"/>
-        <TextField fx:id="subcategoryTextField"/>
-        <TextField fx:id="descriptionTextField"/>
-        <TextField fx:id="typeTextField"/>
-        <TextField fx:id="amountTextField"/>
-    </HBox>
+    <!--<fx:include source="addbudgetbox.fxml" fx:id="addBudgetBox"/>-->
     <Button text="Hi" onAction="#onButtonAction"/>
     <Button text="Add" onAction="#addButtonClicked"/>
 </VBox>

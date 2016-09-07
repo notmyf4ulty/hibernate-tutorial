@@ -3,20 +3,21 @@ package com.catnbear.fxml;
 import com.catnbear.database.Budget;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class StartLayoutController {
     @FXML private TableView<Budget> tableView;
-    @FXML private TextField dateTextField;
-    @FXML private TextField counterPartyTextField;
-    @FXML private TextField categoryTextField;
-    @FXML private TextField subcategoryTextField;
-    @FXML private TextField descriptionTextField;
-    @FXML private TextField typeTextField;
-    @FXML private TextField amountTextField;
+    @FXML private Pane addBudgetBox;
+    @FXML private VBox mainPane;
+    private static boolean wasAddButtonClickedBefore = false;
 
     @FXML private void onButtonAction() {
         try {
@@ -28,15 +29,40 @@ public class StartLayoutController {
     }
 
     @FXML private void addButtonClicked() {
-        Budget budget = new Budget();
-        budget.setDate(dateTextField.getText());
-        budget.setCounterParty(counterPartyTextField.getText());
-        budget.setCategory(categoryTextField.getText());
-        budget.setSubcategory(subcategoryTextField.getText());
-        budget.setDescription(descriptionTextField.getText());
-        budget.setType(typeTextField.getText());
-        budget.setAmount(amountTextField.getText());
+        wasAddButtonClickedBefore = !wasAddButtonClickedBefore;
+        if(wasAddButtonClickedBefore) {
+            try {
+                Pane pane = (Pane) FXMLLoader.load(getClass().getResource("/fxml/addbudgetbox.fxml"));
+                pane.setId("addBudgetBox");
+                mainPane.getChildren().add(mainPane.getChildren().indexOf(tableView)+1,pane);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mainPane.getChildren().remove(getChildOfId(mainPane,"addBudgetBox"));
 
-        budget.queryUpdate();
+        }
+    }
+
+    private Node getChildOfId(Pane pane, String id) {
+        ObservableList<Node> children = pane.getChildren();
+        for (Node child : children) {
+            String childId = child.getId();
+            if ((childId != null) && childId.equals(id)) {
+                return child;
+            }
+        }
+        return null;
+    }
+
+    private int getChildIndexOfId(Pane pane, String id) {
+        ObservableList<Node> children = pane.getChildren();
+        for (Node child : children) {
+            String childId = child.getId();
+            if ((childId != null) && childId.equals(id)) {
+                return children.indexOf(child);
+            }
+        }
+        return -1;
     }
 }
