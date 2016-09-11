@@ -1,6 +1,6 @@
 package com.catnbear.fxml;
 
-import com.catnbear.database.DataStuff;
+import com.catnbear.database.DataModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
@@ -9,14 +9,14 @@ import java.sql.SQLException;
 public class FiltersController {
     @FXML private ChoiceBox yearChoiceBox;
     @FXML private ChoiceBox monthChoiceBox;
-    @FXML private ChoiceBox categoryChoiceBox;
-    @FXML StartLayoutController startLayoutController;
+    @FXML private ChoiceBox<String> categoryChoiceBox;
+    private DataModel dataModel;
 
     @FXML
     public void initialize() {
-        startLayoutController = new StartLayoutController();
+        dataModel = DataModel.getInstance();
         try {
-            categoryChoiceBox.setItems(DataStuff.getInstance().getAllCategories());
+            categoryChoiceBox.setItems(DataModel.getInstance().getAllCategories());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -30,13 +30,11 @@ public class FiltersController {
     }
 
     @FXML private void categoryChoiceBoxChosen() {
-        System.out.println(categoryChoiceBox.getSelectionModel().getSelectedItem().toString());
         try {
-//            DataStuff.getInstance().filterData("category",
-//                    categoryChoiceBox.getSelectionModel().getSelectedItem().toString());
-            DataStuff.getInstance().getTableView().setItems(
-                    DataStuff.getInstance().filterData("category",
-                            categoryChoiceBox.getSelectionModel().getSelectedItem().toString()));
+            dataModel.filterData(
+                    "category",
+                    categoryChoiceBox.getSelectionModel().getSelectedItem()
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }

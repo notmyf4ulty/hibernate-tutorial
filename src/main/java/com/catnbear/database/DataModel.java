@@ -5,25 +5,23 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
 
 /**
  * Created by przemek on 07.09.16.
  */
-public class DataStuff {
-    private static DataStuff instance = null;
+public class DataModel {
+    private static DataModel instance = null;
     private static ObservableList<Budget> budgetList;
 
     public static void setTableView(TableView<Budget> tableView) {
-        DataStuff.tableView = tableView;
+        DataModel.tableView = tableView;
     }
 
     private static TableView<Budget> tableView;
 
-    private DataStuff() {
+    private DataModel() {
         try {
             updateBudgetList();
         } catch (SQLException e) {
@@ -32,9 +30,9 @@ public class DataStuff {
         tableView = new TableView();
     }
 
-    public static DataStuff getInstance() {
+    public static DataModel getInstance() {
         if (instance == null) {
-            instance = new DataStuff();
+            instance = new DataModel();
         }
         return instance;
     }
@@ -63,13 +61,15 @@ public class DataStuff {
         return FXCollections.observableArrayList(resultSet);
     }
 
-    public ObservableList<Budget> filterData(String columnName, String columnValue) throws SQLException {
-        String query = "SELECT * FROM wimm.notmyf4ulty_budget WHERE "
-        + "" + columnName + "=\"" + columnValue + "\";";
+    public void filterData(String columnName, String columnValue) throws SQLException {
+        String query =
+                "SELECT * FROM wimm.notmyf4ulty_budget WHERE "
+                        + ""
+                        + columnName
+                        + "=\""
+                        + columnValue + "\";";
 
-        System.out.println(query);
-
-        return Budget.queryResultToObservableList(query);
+        tableView.setItems(Budget.queryResultToObservableList(query));
     }
 
     private void updateBudgetList() throws SQLException {

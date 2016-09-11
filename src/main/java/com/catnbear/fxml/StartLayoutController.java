@@ -1,14 +1,12 @@
 package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
-import com.catnbear.database.DataStuff;
+import com.catnbear.database.DataModel;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -25,7 +23,7 @@ public class StartLayoutController {
     @FXML
     public void initialize() {
         System.out.println("Setting tableView");
-        DataStuff.getInstance().setTableView(tableView);
+        DataModel.getInstance().setTableView(tableView);
     }
     public TableView<Budget> getTableView() {
         return tableView;
@@ -33,7 +31,7 @@ public class StartLayoutController {
 
     @FXML private void onButtonAction() {
         try {
-            budgetList = DataStuff.getInstance().getBudgetList();
+            budgetList = DataModel.getInstance().getBudgetList();
         } catch (SQLException e) {
             e.printStackTrace();
         }
