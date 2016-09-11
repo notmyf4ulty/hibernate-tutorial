@@ -17,25 +17,25 @@ public class StartLayoutController {
     @FXML private TableView<Budget> tableView;
     @FXML private VBox mainPane;
     private static boolean wasAddButtonClickedBefore = false;
-    ObservableList<Budget> budgetList;
+    private DataModel dataModel;
 
 
     @FXML
     public void initialize() {
-        System.out.println("Setting tableView");
+        dataModel = DataModel.getInstance();
         DataModel.getInstance().setTableView(tableView);
     }
+
     public TableView<Budget> getTableView() {
         return tableView;
     }
 
     @FXML private void onButtonAction() {
         try {
-            budgetList = DataModel.getInstance().getBudgetList();
+            dataModel.showData("SELECT * FROM wimm.notmyf4ulty_budget;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        tableView.setItems(budgetList);
     }
 
     @FXML private void addButtonClicked() {

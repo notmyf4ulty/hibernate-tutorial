@@ -8,17 +8,11 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by przemek on 07.09.16.
- */
 public class DataModel {
     private static DataModel instance = null;
     private static ObservableList<Budget> budgetList;
 
-    public static void setTableView(TableView<Budget> tableView) {
-        DataModel.tableView = tableView;
-    }
-
+    private static String currentQuery;
     private static TableView<Budget> tableView;
 
     private DataModel() {
@@ -27,7 +21,7 @@ public class DataModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        tableView = new TableView();
+        tableView = new TableView<Budget>();
     }
 
     public static DataModel getInstance() {
@@ -61,6 +55,10 @@ public class DataModel {
         return FXCollections.observableArrayList(resultSet);
     }
 
+    public void showData(String query) throws SQLException {
+        tableView.setItems(Budget.queryResultToObservableList(query));
+    }
+
     public void filterData(String columnName, String columnValue) throws SQLException {
         String query =
                 "SELECT * FROM wimm.notmyf4ulty_budget WHERE "
@@ -70,6 +68,18 @@ public class DataModel {
                         + columnValue + "\";";
 
         tableView.setItems(Budget.queryResultToObservableList(query));
+    }
+
+    public static void setTableView(TableView<Budget> tableView) {
+        DataModel.tableView = tableView;
+    }
+
+    public static String getCurrentQuery() {
+        return currentQuery;
+    }
+
+    public static void setCurrentQuery(String currentQuery) {
+        DataModel.currentQuery = currentQuery;
     }
 
     private void updateBudgetList() throws SQLException {
