@@ -21,6 +21,12 @@ public class StartLayoutController {
     private static boolean wasAddButtonClickedBefore = false;
     ObservableList<Budget> budgetList;
 
+
+    @FXML
+    public void initialize() {
+        System.out.println("Setting tableView");
+        DataStuff.getInstance().setTableView(tableView);
+    }
     public TableView<Budget> getTableView() {
         return tableView;
     }

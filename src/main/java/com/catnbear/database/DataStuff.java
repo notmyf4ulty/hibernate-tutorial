@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 /**
  * Created by przemek on 07.09.16.
@@ -15,6 +16,11 @@ import java.util.Set;
 public class DataStuff {
     private static DataStuff instance = null;
     private static ObservableList<Budget> budgetList;
+
+    public static void setTableView(TableView<Budget> tableView) {
+        DataStuff.tableView = tableView;
+    }
+
     private static TableView<Budget> tableView;
 
     private DataStuff() {
@@ -43,7 +49,7 @@ public class DataStuff {
     }
 
     public ObservableList<String> getAllCategories() throws SQLException {
-            updateBudgetList();
+        updateBudgetList();
 
         Set<String> resultSet = new HashSet<String>();
 
@@ -55,6 +61,15 @@ public class DataStuff {
             System.out.println(category);
         }
         return FXCollections.observableArrayList(resultSet);
+    }
+
+    public ObservableList<Budget> filterData(String columnName, String columnValue) throws SQLException {
+        String query = "SELECT * FROM wimm.notmyf4ulty_budget WHERE "
+        + "" + columnName + "=\"" + columnValue + "\";";
+
+        System.out.println(query);
+
+        return Budget.queryResultToObservableList(query);
     }
 
     private void updateBudgetList() throws SQLException {

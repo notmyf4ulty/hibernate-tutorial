@@ -14,8 +14,9 @@ public class FiltersController {
 
     @FXML
     public void initialize() {
+        startLayoutController = new StartLayoutController();
         try {
-            yearChoiceBox.setItems(DataStuff.getInstance().getAllCategories());
+            categoryChoiceBox.setItems(DataStuff.getInstance().getAllCategories());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -29,7 +30,16 @@ public class FiltersController {
     }
 
     @FXML private void categoryChoiceBoxChosen() {
-
+        System.out.println(categoryChoiceBox.getSelectionModel().getSelectedItem().toString());
+        try {
+//            DataStuff.getInstance().filterData("category",
+//                    categoryChoiceBox.getSelectionModel().getSelectedItem().toString());
+            DataStuff.getInstance().getTableView().setItems(
+                    DataStuff.getInstance().filterData("category",
+                            categoryChoiceBox.getSelectionModel().getSelectedItem().toString()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 
