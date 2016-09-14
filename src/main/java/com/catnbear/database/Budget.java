@@ -89,7 +89,7 @@ public class Budget {
                 TABLE_COLUMNS_NAMES[TYPE_COLUMN_INDEX-1] + "," +
                 TABLE_COLUMNS_NAMES[AMOUNT_COLUMN_INDEX-1] + ")" +
                 " VALUES " + "(" +
-                "str_to_date(" + date.getValue() + ",'%Y-%m-%d')" + "," +
+                "\"" + date.getValue() + "\"," +
                 "\"" + counterParty.getValue() + "\"" + "," +
                 "\"" + category.getValue() +"\"" +  "," +
                 "\"" + subcategory.getValue() +"\"" +  "," +
