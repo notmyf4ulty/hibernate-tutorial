@@ -3,20 +3,21 @@ package com.catnbear.fxml;
 import com.catnbear.database.DataModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 
 import java.sql.SQLException;
 
 public class FiltersController {
-    @FXML private ChoiceBox yearChoiceBox;
-    @FXML private ChoiceBox monthChoiceBox;
-    @FXML private ChoiceBox<String> categoryChoiceBox;
+    @FXML private ComboBox yearComboBox;
+    @FXML private ComboBox monthComboBox;
+    @FXML private ComboBox categoryComboBox;
     private DataModel dataModel;
 
     @FXML
     public void initialize() {
         dataModel = DataModel.getInstance();
         try {
-            categoryChoiceBox.setItems(DataModel.getInstance().getAllCategories());
+            categoryComboBox.setItems(DataModel.getInstance().getAllCategories());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,7 +34,7 @@ public class FiltersController {
         try {
             dataModel.filterData(
                     "category",
-                    categoryChoiceBox.getSelectionModel().getSelectedItem()
+                    categoryComboBox.getSelectionModel().getSelectedItem().toString()
             );
         } catch (SQLException e) {
             e.printStackTrace();

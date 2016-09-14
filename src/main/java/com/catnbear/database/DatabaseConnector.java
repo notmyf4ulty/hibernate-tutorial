@@ -10,7 +10,6 @@ public class DatabaseConnector {
 
     private static DatabaseConnector instance = null;
     private Connection connection;
-    private ResultSet resultSet;
 
     private DatabaseConnector() {
         connection = establishConnection();

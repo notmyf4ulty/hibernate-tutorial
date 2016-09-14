@@ -53,6 +53,11 @@ public class StartLayoutController {
         }
     }
 
+    @FXML
+    private void deleteButtonClicked() {
+        removeSelectedItem();
+    }
+
     private Node getChildOfId(Pane pane, String id) {
         ObservableList<Node> children = pane.getChildren();
         for (Node child : children) {
@@ -73,5 +78,14 @@ public class StartLayoutController {
             }
         }
         return -1;
+    }
+
+    private void removeSelectedItem() {
+        int index = Integer.parseInt(tableView.getSelectionModel().getSelectedItem().getId());
+        try {
+            dataModel.removeFromTable(index);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -7,6 +7,9 @@
     <groupId>com.catnbearsoftware</groupId>
     <artifactId>hibernate-tutorial</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <configuration>
+        <source>1.8</source>
+    </configuration>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->

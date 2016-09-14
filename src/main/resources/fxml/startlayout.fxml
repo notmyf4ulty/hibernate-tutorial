@@ -54,8 +54,11 @@
             </columns>
         </TableView>
         <!--<fx:include source="addbudgetbox.fxml" fx:id="addBudgetBox"/>-->
-        <Button text="Hi" onAction="#onButtonAction"/>
-        <Button text="Add" onAction="#addButtonClicked"/>
+        <HBox>
+            <Button text="Hi" onAction="#onButtonAction"/>
+            <Button text="Add" onAction="#addButtonClicked"/>
+            <Button text="Delete Item" onAction="#deleteButtonClicked"/>
+        </HBox>
     </VBox>
     <fx:include source="filters.fxml"/>
 </HBox>

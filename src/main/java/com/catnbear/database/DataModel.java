@@ -86,5 +86,14 @@ public class DataModel {
         budgetList = Budget.queryResultToObservableList("SELECT * FROM wimm.notmyf4ulty_budget;");
     }
 
+    public void removeFromTable(int tableId) throws SQLException {
+        String query = "DELETE FROM wimm.notmyf4ulty_budget WHERE id = " + tableId + ";";
+        System.out.println(query);
+        DatabaseConnector
+                .getInstance()
+                .getConnection()
+                .createStatement()
+                .executeUpdate(query);
+    }
 
 }

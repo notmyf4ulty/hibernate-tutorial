@@ -3,9 +3,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Button?>
-<VBox fx:id="filterBox" xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.FiltersController">
-    <Button onAction="#yearChoiceBoxChosen"/>
-    <ChoiceBox fx:id="yearChoiceBox"/>
-    <ChoiceBox fx:id="monthChoiceBox" onAction="#monthChoiceBoxChosen"/>
-    <ChoiceBox fx:id="categoryChoiceBox" onAction="#categoryChoiceBoxChosen"/>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<VBox fx:id="filterBox" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.catnbear.fxml.FiltersController"
+stylesheets="@/css/filters.css">
+    <HBox>
+        <Label text="Year:"/>
+        <ComboBox fx:id="yearComboBox"/>
+    </HBox>
+    <HBox>
+        <Label text="Month:"/>
+        <ComboBox fx:id="monthComboBox" onAction="#monthChoiceBoxChosen"/>
+    </HBox>
+    <HBox>
+        <Label text="Category:"/>
+        <ComboBox fx:id="categoryComboBox" onAction="#categoryChoiceBoxChosen"/>
+    </HBox>
 </VBox>
