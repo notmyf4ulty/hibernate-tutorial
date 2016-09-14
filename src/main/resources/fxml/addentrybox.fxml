@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.catnbear.fxml.addEntryBoxController"
+stylesheets="@/css/addentrybox.css"
+fx:id="addEntryBox">
+    <HBox>
+        <Label text="Date: "/>
+        <TextField fx:id="dateTextField"/>
+    </HBox>
+    <HBox>
+        <Label text="Counterparty: "/>
+        <TextField fx:id="counterPartyTextField"/>
+    </HBox>
+    <HBox>
+        <Label text="Category: "/>
+        <TextField fx:id="categoryTextField"/>
+    </HBox>
+    <HBox>
+        <Label text="Subcategory: "/>
+        <TextField fx:id="subcategoryTextField"/>
+    </HBox>
+    <HBox>
+        <Label text="Description: "/>
+        <TextField fx:id="descriptionTextField"/>
+    </HBox>
+    <HBox>
+        <Label text="Type: "/>
+        <TextField fx:id="typeTextField"/>
+    </HBox>
+    <HBox>
+        <Label text="Amount: "/>
+        <TextField fx:id="amountTextField"/>
+    </HBox>
+    <HBox>
+        <Button text="Add entry" onAction="#addBudgetButtonClicked"/>
+    </HBox>
+</VBox>

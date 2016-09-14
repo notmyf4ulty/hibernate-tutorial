@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 /**
  * Created by przemek on 05.09.16.
  */
-public class addBudgetBoxController {
+public class addEntryBoxController {
     @FXML private TextField dateTextField;
     @FXML private TextField counterPartyTextField;
     @FXML private TextField categoryTextField;

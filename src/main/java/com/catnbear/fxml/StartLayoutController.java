@@ -42,7 +42,7 @@ public class StartLayoutController {
         wasAddButtonClickedBefore = !wasAddButtonClickedBefore;
         if(wasAddButtonClickedBefore) {
             try {
-                Pane pane = (Pane) FXMLLoader.load(getClass().getResource("/fxml/addbudgetbox.fxml"));
+                Pane pane = (Pane) FXMLLoader.load(getClass().getResource("/fxml/addentrybox.fxml"));
                 pane.setId("addBudgetBox");
                 mainPane.getChildren().add(mainPane.getChildren().indexOf(tableView)+1,pane);
             } catch (IOException e) {
