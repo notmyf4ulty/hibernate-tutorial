@@ -16,7 +16,13 @@ public class DataFilter {
         tableName = "";
     }
 
-    public String addFilter(String columnName, String value) {
+    public String addVarcharFilter(String columnName, String value) {
+        String newFilter = "(" + columnName + " = \"" + value + "\")";
+        filtersVector.add(newFilter);
+        return newFilter;
+    }
+
+    public String addNumericFilter(String columnName, String value) {
         String newFilter = "(" + columnName + " = " + value + ")";
         filtersVector.add(newFilter);
         return newFilter;
@@ -26,7 +32,7 @@ public class DataFilter {
         return filtersVector;
     }
 
-    public String getFilterQuery() {
+    public String getFilterToQuery() {
         int filtersVectorLength = filtersVector.size();
         String query = "SELECT * FROM " + databaseName + "." + tableName + " WHERE ";
 
