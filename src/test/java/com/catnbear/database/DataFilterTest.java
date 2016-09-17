@@ -2,7 +2,6 @@ package com.catnbear.database;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.Vector;
 import static org.junit.Assert.*;
 

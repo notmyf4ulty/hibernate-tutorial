@@ -34,17 +34,24 @@ public class DataFilter {
 
     public String getFilterToQuery() {
         int filtersVectorLength = filtersVector.size();
-        String query = "SELECT * FROM " + databaseName + "." + tableName + " WHERE ";
+        String query = "SELECT * FROM " + databaseName + "." + tableName;
 
-        for (String filter : filtersVector) {
-            query += filter;
-            if (filtersVector.indexOf(filter) != filtersVectorLength - 1) {
-                query += " AND ";
+        if(!filtersVector.isEmpty()) {
+            query += " WHERE ";
+            for (String filter : filtersVector) {
+                query += filter;
+                if (filtersVector.indexOf(filter) != filtersVectorLength - 1) {
+                    query += " AND ";
+                }
             }
         }
         query += ";";
 
         return query;
+    }
+
+    public void resetFilters() {
+        filtersVector.removeAllElements();
     }
 
     public String getDatabaseName() {

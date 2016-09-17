@@ -15,6 +15,8 @@ public class DataModel {
     private static String currentQuery;
     private static TableView<Budget> tableView;
 
+    private DataFilter dataFilter;
+
     private DataModel() {
         try {
             updateBudgetList();
@@ -22,6 +24,7 @@ public class DataModel {
             e.printStackTrace();
         }
         tableView = new TableView<Budget>();
+        dataFilter = new DataFilter();
     }
 
     public static DataModel getInstance() {
@@ -96,4 +99,11 @@ public class DataModel {
                 .executeUpdate(query);
     }
 
+    public DataFilter getDataFilter() {
+        return dataFilter;
+    }
+
+    public void setDataFilter(DataFilter dataFilter) {
+        this.dataFilter = dataFilter;
+    }
 }

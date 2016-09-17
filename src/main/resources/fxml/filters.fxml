@@ -6,9 +6,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
 <VBox fx:id="filterBox" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.catnbear.fxml.FiltersController"
-stylesheets="@/css/filters.css">
+      stylesheets="@/css/filters.css">
     <HBox>
         <Label text="Year:"/>
         <ComboBox fx:id="yearComboBox"/>
@@ -21,4 +22,10 @@ stylesheets="@/css/filters.css">
         <Label text="Category:"/>
         <ComboBox fx:id="categoryComboBox" onAction="#categoryChoiceBoxChosen"/>
     </HBox>
+    <HBox>
+        <TextField fx:id="categoryTextField"/>
+        <TextField fx:id="valueTextField"/>
+        <Button text="Add" onAction="#addFilterButtonClicked"/>
+    </HBox>
+    <Button text="Reset Filters" onAction="#resetFiltersButtonClicked"/>
 </VBox>
