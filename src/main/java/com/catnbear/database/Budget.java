@@ -139,8 +139,6 @@ public class Budget {
         }
     }
 
-//    public void showCate
-
     public String toString() {
         return
                 id + " " +
