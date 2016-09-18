@@ -12,7 +12,7 @@
     <VBox>
         <ImageButton url="/icon/add.png" onAction="#newAddButtonClicked"/>
         <ImageButton url="/icon/edit.png"/>
-        <ImageButton url="/icon/delete.png"/>
+        <ImageButton url="/icon/delete.png" onAction="#deleteButtonClicked"/>
         <ImageButton url="/icon/filters.png" onAction="#filtersButtonClicked"/>
         <ImageButton url="/icon/settings.png"/>
     </VBox>
@@ -63,7 +63,6 @@
         </TableView>
         <HBox>
             <Button text="Show All Items" onAction="#onButtonAction"/>
-            <Button text="Delete Item" onAction="#deleteButtonClicked"/>
         </HBox>
     </VBox>
 </HBox>

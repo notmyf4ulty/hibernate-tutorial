@@ -11,8 +11,10 @@ import java.sql.SQLException;
 public class FiltersController {
     @FXML private TextField categoryTextField;
     @FXML private TextField valueTextField;
+
     @FXML
     private ListView filtersListView;
+
     private DataModel dataModel;
 
     @FXML

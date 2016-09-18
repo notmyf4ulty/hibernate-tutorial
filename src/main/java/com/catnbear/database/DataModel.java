@@ -106,4 +106,6 @@ public class DataModel {
     public void setDataFilter(DataFilter dataFilter) {
         this.dataFilter = dataFilter;
     }
+
+
 }

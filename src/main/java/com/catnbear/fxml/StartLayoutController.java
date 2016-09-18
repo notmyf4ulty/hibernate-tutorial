@@ -26,7 +26,7 @@ public class StartLayoutController {
     @FXML
     public void initialize() {
         dataModel = DataModel.getInstance();
-        DataModel.getInstance().setTableView(tableView);
+        dataModel.setTableView(tableView);
     }
 
     public TableView<Budget> getTableView() {
@@ -54,11 +54,13 @@ public class StartLayoutController {
         } else {
             mainPane.getChildren().remove(getChildOfId(mainPane,"addBudgetBox"));
         }
+
     }
 
     @FXML
     private void deleteButtonClicked() {
         removeSelectedItem();
+//        refreshTable();
     }
 
     @FXML
