@@ -14,6 +14,7 @@
         <ImageButton url="/icon/edit.png"/>
         <ImageButton url="/icon/delete.png"/>
         <ImageButton url="/icon/filters.png"/>
+        <ImageButton url="/icon/settings.png"/>
     </VBox>
     <VBox fx:id="mainPane" >
         <TableView fx:id="tableView">
