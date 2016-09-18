@@ -6,8 +6,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.TextField?>
+<?import com.catnbear.customcontrols.ImageButton?>
+
 <HBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
+    <VBox>
+        <ImageButton url="/icon/add.png"/>
+        <ImageButton url="/icon/edit.png"/>
+        <ImageButton url="/icon/delete.png"/>
+        <ImageButton url="/icon/filters.png"/>
+    </VBox>
     <VBox fx:id="mainPane" >
         <TableView fx:id="tableView">
             <columns>

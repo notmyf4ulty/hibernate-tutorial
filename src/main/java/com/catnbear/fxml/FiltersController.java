@@ -68,6 +68,7 @@ public class FiltersController {
     @FXML
     private void resetFiltersButtonClicked() {
         dataModel.getDataFilter().resetFilters();
+        System.out.println(dataModel.getDataFilter().getAllFilters());
         try {
             dataModel.showData(dataModel
                     .getDataFilter()

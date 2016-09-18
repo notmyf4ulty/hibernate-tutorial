@@ -58,6 +58,10 @@ public class StartLayoutController {
         removeSelectedItem();
     }
 
+    @FXML
+    private void thingsHappen() {
+        System.out.println("Hello!");
+    }
     private Node getChildOfId(Pane pane, String id) {
         ObservableList<Node> children = pane.getChildren();
         for (Node child : children) {
