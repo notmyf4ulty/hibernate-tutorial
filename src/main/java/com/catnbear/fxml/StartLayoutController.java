@@ -66,6 +66,11 @@ public class StartLayoutController {
         GuiModifier.openNewWindow("/fxml/addentrybox.fxml",this);
     }
 
+    @FXML
+    private void filtersButtonClicked() {
+        GuiModifier.openNewWindow("/fxml/filters.fxml",this);
+    }
+
 
     private Node getChildOfId(Pane pane, String id) {
         ObservableList<Node> children = pane.getChildren();

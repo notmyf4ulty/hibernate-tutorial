@@ -13,7 +13,7 @@
         <ImageButton url="/icon/add.png" onAction="#newAddButtonClicked"/>
         <ImageButton url="/icon/edit.png"/>
         <ImageButton url="/icon/delete.png"/>
-        <ImageButton url="/icon/filters.png"/>
+        <ImageButton url="/icon/filters.png" onAction="#filtersButtonClicked"/>
         <ImageButton url="/icon/settings.png"/>
     </VBox>
     <VBox fx:id="mainPane" >
@@ -66,5 +66,4 @@
             <Button text="Delete Item" onAction="#deleteButtonClicked"/>
         </HBox>
     </VBox>
-    <fx:include source="filters.fxml"/>
 </HBox>
