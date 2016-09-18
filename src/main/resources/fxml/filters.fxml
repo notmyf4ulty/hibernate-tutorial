@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.control.ListView?>
 <VBox fx:id="filterBox" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.catnbear.fxml.FiltersController"
       stylesheets="@/css/filters.css">
-    <HBox>
-        <Label text="Year:"/>
-        <ComboBox fx:id="yearComboBox"/>
-    </HBox>
-    <HBox>
-        <Label text="Month:"/>
-        <ComboBox fx:id="monthComboBox" onAction="#monthChoiceBoxChosen"/>
-    </HBox>
-    <HBox>
-        <Label text="Category:"/>
-        <ComboBox fx:id="categoryComboBox" onAction="#categoryChoiceBoxChosen"/>
-    </HBox>
     <HBox>
         <TextField fx:id="categoryTextField"/>
         <TextField fx:id="valueTextField"/>
         <Button text="Add" onAction="#addFilterButtonClicked"/>
     </HBox>
+    <ListView fx:id="filtersListView"/>
     <Button text="Reset Filters" onAction="#resetFiltersButtonClicked"/>
 </VBox>

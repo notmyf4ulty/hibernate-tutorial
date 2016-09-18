@@ -62,7 +62,7 @@
             </columns>
         </TableView>
         <HBox>
-            <Button text="Hi" onAction="#onButtonAction"/>
+            <Button text="Show All Items" onAction="#onButtonAction"/>
             <Button text="Delete Item" onAction="#deleteButtonClicked"/>
         </HBox>
     </VBox>
