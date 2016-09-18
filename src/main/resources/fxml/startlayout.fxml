@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import com.catnbear.customcontrols.ImageButton?>
 
-<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
+<HBox fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
     <VBox>
-        <ImageButton url="/icon/add.png"/>
+        <ImageButton url="/icon/add.png" onAction="#newAddButtonClicked"/>
         <ImageButton url="/icon/edit.png"/>
         <ImageButton url="/icon/delete.png"/>
         <ImageButton url="/icon/filters.png"/>
@@ -61,13 +61,10 @@
                 </TableColumn>
             </columns>
         </TableView>
-        <!--<fx:include source="addentrybox.fxml" fx:id="addBudgetBox"/>-->
         <HBox>
             <Button text="Hi" onAction="#onButtonAction"/>
-            <!--<Button text="Add" onAction="#addButtonClicked"/>-->
             <Button text="Delete Item" onAction="#deleteButtonClicked"/>
         </HBox>
     </VBox>
-    <fx:include source="addentrybox.fxml"/>
     <fx:include source="filters.fxml"/>
 </HBox>

@@ -2,20 +2,23 @@ package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
 import com.catnbear.database.DataModel;
+import com.catnbear.utlilities.GuiModifier;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.sql.*;
 
 public class StartLayoutController {
     @FXML private TableView<Budget> tableView;
     @FXML private VBox mainPane;
+    @FXML
+    HBox rootPane;
     private static boolean wasAddButtonClickedBefore = false;
     private DataModel dataModel;
 
@@ -59,9 +62,11 @@ public class StartLayoutController {
     }
 
     @FXML
-    private void thingsHappen() {
-        System.out.println("Hello!");
+    private void newAddButtonClicked() {
+        GuiModifier.openNewWindow("/fxml/addentrybox.fxml",this);
     }
+
+
     private Node getChildOfId(Pane pane, String id) {
         ObservableList<Node> children = pane.getChildren();
         for (Node child : children) {
