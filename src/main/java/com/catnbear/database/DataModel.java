@@ -11,10 +11,8 @@ import java.util.Set;
 public class DataModel {
     private static DataModel instance = null;
     private static ObservableList<Budget> budgetList;
-
     private static String currentQuery;
     private static TableView<Budget> tableView;
-
     private DataFilter dataFilter;
 
     private DataModel() {
@@ -107,5 +105,8 @@ public class DataModel {
         this.dataFilter = dataFilter;
     }
 
-
+    public void updateWithFilters() throws SQLException {
+        System.out.println(dataFilter.getFilterToQuery());
+        showData(dataFilter.getFilterToQuery());
+    }
 }

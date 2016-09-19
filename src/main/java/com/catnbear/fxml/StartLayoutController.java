@@ -27,6 +27,8 @@ public class StartLayoutController {
     public void initialize() {
         dataModel = DataModel.getInstance();
         dataModel.setTableView(tableView);
+        dataModel.getDataFilter().setTableName("notmyf4ulty_budget");
+        dataModel.getDataFilter().setDatabaseName("wimm");
     }
 
     public TableView<Budget> getTableView() {
@@ -60,6 +62,11 @@ public class StartLayoutController {
     @FXML
     private void deleteButtonClicked() {
         removeSelectedItem();
+        try {
+            dataModel.updateWithFilters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 //        refreshTable();
     }
 
