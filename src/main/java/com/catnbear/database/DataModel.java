@@ -10,10 +10,11 @@ import java.util.Set;
 
 public class DataModel {
     private static DataModel instance = null;
-    private static ObservableList<Budget> budgetList;
-    private static String currentQuery;
-    private static TableView<Budget> tableView;
+    private ObservableList<Budget> budgetList;
+    private TableView<Budget> tableView;
     private DataFilter dataFilter;
+    private String databaseName;
+    private String tableName;
 
     private DataModel() {
         try {
@@ -21,8 +22,12 @@ public class DataModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        tableView = new TableView<Budget>();
+        tableView = new TableView<>();
         dataFilter = new DataFilter();
+        databaseName = "wimm";
+        tableName = "notmyf4ulty_budget";
+        dataFilter.setDatabaseName(databaseName);
+        dataFilter.setTableName(tableName);
     }
 
     public static DataModel getInstance() {
@@ -32,59 +37,21 @@ public class DataModel {
         return instance;
     }
 
-    public ObservableList<Budget> getBudgetList() throws SQLException {
-        updateBudgetList();
-        return budgetList;
+    public void showData(String query) throws SQLException {
+        tableView.setItems(Budget.queryResultToObservableList(query));
     }
 
     public TableView getTableView() {
         return tableView;
     }
 
-    public ObservableList<String> getAllCategories() throws SQLException {
-        updateBudgetList();
-
-        Set<String> resultSet = new HashSet<String>();
-
-        for (Budget budgetElement : budgetList) {
-            resultSet.add(budgetElement.getCategory());
-        }
-
-        for (String category : resultSet) {
-            System.out.println(category);
-        }
-        return FXCollections.observableArrayList(resultSet);
-    }
-
-    public void showData(String query) throws SQLException {
-        tableView.setItems(Budget.queryResultToObservableList(query));
-    }
-
-    public void filterData(String columnName, String columnValue) throws SQLException {
-        String query =
-                "SELECT * FROM wimm.notmyf4ulty_budget WHERE "
-                        + ""
-                        + columnName
-                        + "=\""
-                        + columnValue + "\";";
-
-        tableView.setItems(Budget.queryResultToObservableList(query));
-    }
-
-    public static void setTableView(TableView<Budget> tableView) {
-        DataModel.tableView = tableView;
-    }
-
-    public static String getCurrentQuery() {
-        return currentQuery;
-    }
-
-    public static void setCurrentQuery(String currentQuery) {
-        DataModel.currentQuery = currentQuery;
+    public void setTableView(TableView<Budget> tableView) {
+        this.tableView = tableView;
     }
 
     private void updateBudgetList() throws SQLException {
-        budgetList = Budget.queryResultToObservableList("SELECT * FROM wimm.notmyf4ulty_budget;");
+        budgetList = Budget.queryResultToObservableList(
+                "SELECT * FROM" + databaseName + "." + tableName + ";");
     }
 
     public void removeFromTable(int tableId) throws SQLException {
@@ -108,5 +75,18 @@ public class DataModel {
     public void updateWithFilters() throws SQLException {
         System.out.println(dataFilter.getFilterToQuery());
         showData(dataFilter.getFilterToQuery());
+    }
+
+    public ObservableList<String> getAllCategories() throws SQLException {
+        updateBudgetList();
+
+        Set<String> resultSet = new HashSet<>();
+
+        for (Budget budgetElement : budgetList) {
+            resultSet.add(budgetElement.getCategory());
+        }
+
+        resultSet.forEach(System.out::println);
+        return FXCollections.observableArrayList(resultSet);
     }
 }
