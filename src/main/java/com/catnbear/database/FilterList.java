@@ -47,6 +47,9 @@ public class FilterList {
         this.filterListType = filterListType;
     }
 
+    public void addFilter(Filter filter) {
+        filterList.add(filter);
+    }
     public String toQueryString() {
         String queryBody = "(";
 
