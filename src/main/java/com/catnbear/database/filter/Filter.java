@@ -1,11 +1,11 @@
-package com.catnbear.database;
+package com.catnbear.database.filter;
 public abstract class Filter {
     protected String columnName;
     protected String cellValue;
 
-    public Filter() {}
+    protected Filter() {}
 
-    public Filter(String columnName, String cellValue) {
+    protected Filter(String columnName, String cellValue) {
         this.columnName = columnName;
         this.cellValue = cellValue;
     }

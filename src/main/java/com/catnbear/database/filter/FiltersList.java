@@ -1,10 +1,10 @@
-package com.catnbear.database;
+package com.catnbear.database.filter;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import static com.catnbear.database.FilterList.FilterListType.*;
+import static com.catnbear.database.filter.FiltersList.FilterListType.*;
 
-public class FilterList {
+public class FiltersList {
 
     private ArrayList<Filter> filterList;
 
@@ -25,23 +25,23 @@ public class FilterList {
 
     private FilterListType filterListType;
 
-    public FilterList() {
+    public FiltersList() {
         this.filterList = new ArrayList<>();
         this.filterListType = AND;
     }
 
-    public FilterList(FilterListType filterListType) {
+    public FiltersList(FilterListType filterListType) {
         this.filterList = new ArrayList<>();
         this.filterListType = filterListType;
     }
 
-    public FilterList(Filter ... filterList) {
+    public FiltersList(Filter ... filterList) {
         this.filterList = new ArrayList<>(filterList.length);
         Collections.addAll(this.filterList, filterList);
         this.filterListType = AND;
     }
 
-    public FilterList(FilterListType filterListType, Filter ... filterList) {
+    public FiltersList(FilterListType filterListType, Filter ... filterList) {
         this.filterList = new ArrayList<>(filterList.length);
         Collections.addAll(this.filterList, filterList);
         this.filterListType = filterListType;
@@ -50,6 +50,7 @@ public class FilterList {
     public void addFilter(Filter filter) {
         filterList.add(filter);
     }
+
     public String toQueryString() {
         String queryBody = "(";
 
@@ -63,5 +64,9 @@ public class FilterList {
         }
 
         return queryBody;
+    }
+
+    public boolean isEmpty() {
+        return filterList.isEmpty();
     }
 }

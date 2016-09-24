@@ -1,4 +1,4 @@
-package com.catnbear.database;
+package com.catnbear.database.filter;
 
 public class StringFilter extends Filter {
 
