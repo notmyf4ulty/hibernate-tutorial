@@ -17,17 +17,17 @@ public class DataModel {
     private String tableName;
 
     private DataModel() {
-        try {
-            updateBudgetList();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         tableView = new TableView<>();
         dataFilter = new DataFilter();
         databaseName = "wimm";
         tableName = "notmyf4ulty_budget";
         dataFilter.setDatabaseName(databaseName);
         dataFilter.setTableName(tableName);
+        try {
+            updateBudgetList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static DataModel getInstance() {
@@ -51,7 +51,7 @@ public class DataModel {
 
     private void updateBudgetList() throws SQLException {
         budgetList = Budget.queryResultToObservableList(
-                "SELECT * FROM" + databaseName + "." + tableName + ";");
+                "SELECT * FROM " + databaseName + "." + tableName + ";");
     }
 
     public void removeFromTable(int tableId) throws SQLException {
