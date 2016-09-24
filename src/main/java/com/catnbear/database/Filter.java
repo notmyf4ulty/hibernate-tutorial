@@ -1,5 +1,4 @@
 package com.catnbear.database;
-
 public class Filter {
     String columnName;
     String cellValue;
@@ -9,7 +8,7 @@ public class Filter {
         this.cellValue = cellValue;
     }
 
-    public String getQueryString() {
+    public String toQueryString() {
         return "(" + columnName + "=" + cellValue + ")";
     }
 
