@@ -8,7 +8,7 @@ public class FiltersList {
 
     private ArrayList<Filter> filterList;
 
-    enum FilterListType {
+    public enum FilterListType {
         OR(" OR "),
         AND(" AND ");
 

@@ -1,13 +1,13 @@
 package com.catnbear;
 
-import com.catnbear.database.FiltersListTest;
+import com.catnbear.database.query.SelectQueryTest;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 public class MainTest {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(FiltersListTest.class);
+        Result result = JUnitCore.runClasses(SelectQueryTest.class);
 
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());

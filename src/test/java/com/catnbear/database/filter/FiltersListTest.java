@@ -1,4 +1,4 @@
-package com.catnbear.database;
+package com.catnbear.database.filter;
 
 import com.catnbear.database.filter.Filter;
 import com.catnbear.database.filter.FiltersList;
