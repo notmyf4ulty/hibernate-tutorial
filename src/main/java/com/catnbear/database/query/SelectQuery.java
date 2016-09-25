@@ -41,14 +41,15 @@ public class SelectQuery extends Query{
         String result = "SELECT ";
 
         if (!(columnsList.isEmpty() || (columnsList == null))) {
-            result += "(";
+//            result += "(";
             for (String column : columnsList) {
                 result += column;
                 if (columnsList.indexOf(column) < (columnsList.size() - 1)) {
                     result += ",";
                 }
             }
-            result += ") ";
+//            result += ") ";
+            result += " ";
         } else {
             result += "* ";
         }

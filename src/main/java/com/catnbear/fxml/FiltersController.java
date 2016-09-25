@@ -1,6 +1,9 @@
 package com.catnbear.fxml;
 
 import com.catnbear.database.DataModel;
+import com.catnbear.database.filter.Filter;
+import com.catnbear.database.filter.NumericFilter;
+import com.catnbear.database.filter.StringFilter;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -27,20 +30,27 @@ public class FiltersController {
 
     @FXML
     private void addFilterButtonClicked() {
-        dataModel
-                .getDataFilter()
-                .addVarcharFilter(
-                        categoryTextField.getText(),
-                        valueTextField.getText()
-                );
-        try {
-            dataModel.showData(dataModel
-                    .getDataFilter()
-                    .getFilterToQuery());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        updateFiltersListView();
+        Filter filter = new StringFilter(categoryTextField.getText(), valueTextField.getText());
+        dataModel.getFiltersList().addFilter(filter);
+        dataModel.updateData();
+
+
+//        dataModel
+//                .getDataFilter()
+//                .addVarcharFilter(
+//                        categoryTextField.getText(),
+//                        valueTextField.getText()
+//                );
+//
+//        System.out.println(dataModel.getDataFilter().getFilterToQuery());
+//        try {
+//            dataModel.showData(dataModel
+//                    .getDataFilter()
+//                    .getFilterToQuery());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        updateFiltersListView();
     }
 
     @FXML

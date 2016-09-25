@@ -1,12 +1,14 @@
 package com.catnbear.database;
 
+import com.catnbear.database.filter.FiltersList;
+import com.catnbear.database.query.Query;
+import com.catnbear.database.query.SelectQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class DataModel {
     private static DataModel instance = null;
@@ -16,11 +18,36 @@ public class DataModel {
     private String databaseName;
     private String tableName;
 
+    private final String ID_COLUMN = "id";
+    private final String DATE_COLUMN = "date";
+    private final String COUNTERPARTY_COLUMN = "counterparty";
+    private final String CATEGORY_COLUMN = "category";
+    private final String SUBCATEGORY_COLUMN = "subcategory";
+    private final String DESCRIPTION_COLUMN = "description";
+    private final String TYPE_COLUMN = "type";
+    private final String AMOUNT_COLUMN = "amount";
+    private final List<String> visibleColumnsList = new ArrayList<>(Arrays.asList(
+            new String [] {
+                    DATE_COLUMN,
+                    COUNTERPARTY_COLUMN,
+                    CATEGORY_COLUMN,
+                    SUBCATEGORY_COLUMN,
+                    DESCRIPTION_COLUMN,
+                    TYPE_COLUMN,
+                    AMOUNT_COLUMN
+            }));
+
+    // new stuff
+    private FiltersList filtersList;
+
     private DataModel() {
-        tableView = new TableView<>();
-        dataFilter = new DataFilter();
+        filtersList = new FiltersList();
         databaseName = "wimm";
         tableName = "notmyf4ulty_budget";
+
+        tableView = new TableView<>();
+        dataFilter = new DataFilter();
+
         dataFilter.setDatabaseName(databaseName);
         dataFilter.setTableName(tableName);
         try {
@@ -28,6 +55,7 @@ public class DataModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        updateData();
     }
 
     public static DataModel getInstance() {
@@ -35,6 +63,16 @@ public class DataModel {
             instance = new DataModel();
         }
         return instance;
+    }
+
+    public void updateData() {
+        Query selectQuery = new SelectQuery(databaseName,tableName,filtersList);
+        System.out.println(selectQuery.toExecutableString());
+        try {
+            tableView.setItems(Budget.queryResultToObservableList(selectQuery.toExecutableString()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showData(String query) throws SQLException {
@@ -88,5 +126,13 @@ public class DataModel {
 
         resultSet.forEach(System.out::println);
         return FXCollections.observableArrayList(resultSet);
+    }
+
+    public FiltersList getFiltersList() {
+        return filtersList;
+    }
+
+    public void setFiltersList(FiltersList filtersList) {
+        this.filtersList = filtersList;
     }
 }
