@@ -1,6 +1,7 @@
 package com.catnbear.database;
 
 import com.catnbear.database.filter.FiltersList;
+import com.catnbear.database.query.InsertQuery;
 import com.catnbear.database.query.Query;
 import com.catnbear.database.query.SelectQuery;
 import javafx.collections.FXCollections;
@@ -73,6 +74,11 @@ public class DataModel {
         Query selectQuery = new SelectQuery(databaseName,tableName,filtersList);
         System.out.println(selectQuery.toExecutableString());
             tableView.setItems(Budget.queryResultToObservableList(selectQuery.toExecutableString()));
+    }
+
+    public void addNewItem(List<String> valuesList) {
+        Query insertQuery = new InsertQuery(databaseName,tableName,visibleColumnsList,valuesList);
+        System.out.println(insertQuery.toExecutableString());
     }
 
     public TableView getTableView() {

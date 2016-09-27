@@ -8,6 +8,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by przemek on 05.09.16.
@@ -40,5 +42,17 @@ public class addEntryBoxController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private List<String> getTextFieldsToValuesList() {
+        List<String> valuesList = new ArrayList<String>();
+        valuesList.add(datePicker.getValue().toString());
+        valuesList.add(counterPartyTextField.toString());
+        valuesList.add(categoryTextField.toString());
+        valuesList.add(subcategoryTextField.toString());
+        valuesList.add(descriptionTextField.toString());
+        valuesList.add(typeTextField.toString());
+        valuesList.add(amountTextField.toString());
+        return valuesList;
     }
 }
