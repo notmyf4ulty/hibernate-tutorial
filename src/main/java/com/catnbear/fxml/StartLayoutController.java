@@ -15,11 +15,16 @@ import java.io.IOException;
 import java.sql.*;
 
 public class StartLayoutController {
-    @FXML private TableView<Budget> tableView;
-    @FXML private VBox mainPane;
+
+    @FXML
+    private TableView<Budget> tableView;
+
+    @FXML
+    private VBox mainPane;
+
     @FXML
     HBox rootPane;
-    private static boolean wasAddButtonClickedBefore = false;
+    
     private DataModel dataModel;
 
 
@@ -37,37 +42,20 @@ public class StartLayoutController {
 
     @FXML private void onButtonAction() {
         try {
-            dataModel.showData("SELECT * FROM wimm.notmyf4ulty_budget;");
+            dataModel.updateData();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML private void addButtonClicked() {
-        wasAddButtonClickedBefore = !wasAddButtonClickedBefore;
-        if(wasAddButtonClickedBefore) {
-            try {
-                Pane pane = (Pane) FXMLLoader.load(getClass().getResource("/fxml/addentrybox.fxml"));
-                pane.setId("addBudgetBox");
-                mainPane.getChildren().add(mainPane.getChildren().indexOf(tableView)+1,pane);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            mainPane.getChildren().remove(getChildOfId(mainPane,"addBudgetBox"));
-        }
-
     }
 
     @FXML
     private void deleteButtonClicked() {
         removeSelectedItem();
         try {
-            dataModel.updateWithFilters();
+            dataModel.updateData();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        refreshTable();
     }
 
     @FXML

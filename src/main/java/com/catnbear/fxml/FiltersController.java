@@ -32,17 +32,17 @@ public class FiltersController {
     private void addFilterButtonClicked() {
         Filter filter = new StringFilter(categoryTextField.getText(), valueTextField.getText());
         dataModel.getFiltersList().addFilter(filter);
-        dataModel.updateData();
+        try {
+            dataModel.updateData();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-
-//        dataModel
-//                .getDataFilter()
-//                .addVarcharFilter(
-//                        categoryTextField.getText(),
-//                        valueTextField.getText()
-//                );
-//
-//        System.out.println(dataModel.getDataFilter().getFilterToQuery());
+    @FXML
+    private void resetFiltersButtonClicked() {
+//        dataModel.getDataFilter().resetFilters();
+//        System.out.println(dataModel.getDataFilter().getAllFilters());
 //        try {
 //            dataModel.showData(dataModel
 //                    .getDataFilter()
@@ -51,20 +51,6 @@ public class FiltersController {
 //            e.printStackTrace();
 //        }
 //        updateFiltersListView();
-    }
-
-    @FXML
-    private void resetFiltersButtonClicked() {
-        dataModel.getDataFilter().resetFilters();
-        System.out.println(dataModel.getDataFilter().getAllFilters());
-        try {
-            dataModel.showData(dataModel
-                    .getDataFilter()
-                    .getFilterToQuery());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        updateFiltersListView();
     }
 
     private void updateFiltersListView() {

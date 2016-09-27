@@ -36,7 +36,7 @@ public class addEntryBoxController {
         System.out.println(budget.toQuery());
         budget.queryUpdate();
         try {
-            DataModel.getInstance().updateWithFilters();
+            DataModel.getInstance().updateData();
         } catch (SQLException e) {
             e.printStackTrace();
         }

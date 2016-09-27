@@ -6,7 +6,6 @@ import com.catnbear.database.query.SelectQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
-
 import java.sql.SQLException;
 import java.util.*;
 
@@ -37,7 +36,6 @@ public class DataModel {
                     AMOUNT_COLUMN
             }));
 
-    // new stuff
     private FiltersList filtersList;
 
     private DataModel() {
@@ -50,12 +48,18 @@ public class DataModel {
 
         dataFilter.setDatabaseName(databaseName);
         dataFilter.setTableName(tableName);
+
         try {
             updateBudgetList();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        updateData();
+
+        try {
+            updateData();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static DataModel getInstance() {
@@ -65,18 +69,10 @@ public class DataModel {
         return instance;
     }
 
-    public void updateData() {
+    public void updateData() throws SQLException {
         Query selectQuery = new SelectQuery(databaseName,tableName,filtersList);
         System.out.println(selectQuery.toExecutableString());
-        try {
             tableView.setItems(Budget.queryResultToObservableList(selectQuery.toExecutableString()));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showData(String query) throws SQLException {
-        tableView.setItems(Budget.queryResultToObservableList(query));
     }
 
     public TableView getTableView() {
@@ -108,24 +104,6 @@ public class DataModel {
 
     public void setDataFilter(DataFilter dataFilter) {
         this.dataFilter = dataFilter;
-    }
-
-    public void updateWithFilters() throws SQLException {
-        System.out.println(dataFilter.getFilterToQuery());
-        showData(dataFilter.getFilterToQuery());
-    }
-
-    public ObservableList<String> getAllCategories() throws SQLException {
-        updateBudgetList();
-
-        Set<String> resultSet = new HashSet<>();
-
-        for (Budget budgetElement : budgetList) {
-            resultSet.add(budgetElement.getCategory());
-        }
-
-        resultSet.forEach(System.out::println);
-        return FXCollections.observableArrayList(resultSet);
     }
 
     public FiltersList getFiltersList() {
