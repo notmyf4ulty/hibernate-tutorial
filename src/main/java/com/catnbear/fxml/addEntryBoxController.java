@@ -1,8 +1,10 @@
 package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
+import com.catnbear.database.ColumnValue;
 import com.catnbear.database.DataModel;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -24,10 +26,15 @@ public class addEntryBoxController {
     @FXML private TextField amountTextField;
     @FXML private Button addBudgetButton;
     @FXML private DatePicker datePicker;
+    private DataModel dataModel;
+
+    @FXML
+    private void initialize() {
+        dataModel = DataModel.getInstance();
+    }
 
     @FXML private void addBudgetButtonClicked() {
         Budget budget = new Budget();
-//        budget.setDate(dateTextField.getText());
         budget.setDate(datePicker.getValue().toString());
         budget.setCounterParty(counterPartyTextField.getText());
         budget.setCategory(categoryTextField.getText());
@@ -42,17 +49,27 @@ public class addEntryBoxController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+            dataModel.addNewItem(getTextFieldsToValuesList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private List<String> getTextFieldsToValuesList() {
         List<String> valuesList = new ArrayList<String>();
-        valuesList.add(datePicker.getValue().toString());
-        valuesList.add(counterPartyTextField.toString());
-        valuesList.add(categoryTextField.toString());
-        valuesList.add(subcategoryTextField.toString());
-        valuesList.add(descriptionTextField.toString());
-        valuesList.add(typeTextField.toString());
-        valuesList.add(amountTextField.toString());
+        valuesList.add("\"" + datePicker.getValue().toString() + "\"");
+        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, counterPartyTextField));
+        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, categoryTextField));
+        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, subcategoryTextField));
+        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, descriptionTextField));
+        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, typeTextField));
+        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.NUMBER, amountTextField));
         return valuesList;
+    }
+
+    private String textFiledToColumnValue(ColumnValue.ColumnType columnType, TextField textField) {
+        ColumnValue columnValue = new ColumnValue(columnType, textField.getText());
+        return columnValue.toString();
     }
 }

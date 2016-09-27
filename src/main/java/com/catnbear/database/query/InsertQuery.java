@@ -8,13 +8,13 @@ public class InsertQuery extends Query {
     List<String> valuesList;
 
     public InsertQuery(String dataBaseName, String tableName, List columnslist, List valuesList) {
-        super(dataBaseName,tableName,valuesList);
+        super(dataBaseName,tableName,columnslist);
         this.valuesList = valuesList;
     }
 
     @Override
     public String toExecutableString() {
-        String result = "INSERT INTO " + datbaseName + "." + tableName + "";
+        String result = "INSERT INTO " + datbaseName + "." + tableName + " ";
 
         if (!(columnsList.isEmpty() || (columnsList == null))) {
             result += "(";
@@ -39,9 +39,9 @@ public class InsertQuery extends Query {
                     result += ",";
                 }
             }
-            result += ") ";
+            result += ")";
         } else {
-            result += " ";
+            result += "";
         }
 
         result += ";";

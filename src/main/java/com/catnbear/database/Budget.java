@@ -11,9 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
-/**
- * Created by przemek on 01.09.16.
- */
 public class Budget {
 
     public static final int BUDGET_COLUMN_AMOUNT = 8;
