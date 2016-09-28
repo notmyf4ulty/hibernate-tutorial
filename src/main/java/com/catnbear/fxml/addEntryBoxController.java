@@ -1,10 +1,9 @@
 package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
-import com.catnbear.database.ColumnValue;
+import com.catnbear.database.table.ColumnValue;
 import com.catnbear.database.DataModel;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;

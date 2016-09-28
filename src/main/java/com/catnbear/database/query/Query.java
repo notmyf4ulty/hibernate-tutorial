@@ -101,10 +101,10 @@ class Query {
         return affectedRows;
     }
 
-//    public int remove(String columnName, String columnValue) {
-//        String query = "REMOVE FROM " + databaseName + "." + tableName + " WHERE "
-//                + "\""
-//    }
+    public int remove(String columnName, String columnValue) {
+        String query = "REMOVE FROM " + databaseName + "." + tableName + " WHERE "
+                + "\""
+    }
 
     public String toExecutableString() {
         return "";

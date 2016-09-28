@@ -1,4 +1,4 @@
-package com.catnbear.database;
+package com.catnbear.database.table;
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.apache.commons.lang.StringUtils;
