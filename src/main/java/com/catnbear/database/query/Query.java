@@ -3,6 +3,7 @@ package com.catnbear.database.query;
 import com.catnbear.database.DatabaseConnector;
 import com.catnbear.database.filter.Filter;
 import com.catnbear.database.filter.FiltersList;
+import com.catnbear.database.table.TableCell;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,35 +59,29 @@ public class Query {
         return resultSet;
     }
 
-    public int add(List<String> columnsList, List<String> valuesList) {
+    public int insert(List<TableCell> tableCellsList) {
         String query = "INSERT INTO " + databaseName + "." + tableName + " ";
 
-        if (!(columnsList.isEmpty() || (columnsList == null))) {
+        if (!(tableCellsList.isEmpty() || (tableCellsList == null))) {
             query += "(";
-            for (String column : columnsList) {
-                query += column;
-                if (columnsList.indexOf(column) < (columnsList.size() - 1)) {
+            for (TableCell tableCell : tableCellsList) {
+                query += tableCell.getColumnName();
+                if (tableCellsList.indexOf(tableCell) < (tableCellsList.size() - 1)) {
                     query += ",";
                 }
             }
-            query += ") ";
-        } else {
-            query += " ";
-        }
 
-        query += "VALUES ";
+            query += ") VALUES (";
 
-        if (!(valuesList.isEmpty() || (valuesList == null))) {
-            query += "(";
-            for (String column : valuesList) {
-                query += column;
-                if (valuesList.indexOf(column) < (valuesList.size() - 1)) {
+            for (TableCell tableCell : tableCellsList) {
+                query += tableCell.getColumnValue().getValue();
+                if (tableCellsList.indexOf(tableCell) < (tableCellsList.size() - 1)) {
                     query += ",";
                 }
             }
             query += ")";
         } else {
-            query += "";
+            query = "";
         }
 
         query += ";";

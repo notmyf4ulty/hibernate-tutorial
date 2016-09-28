@@ -1,15 +1,13 @@
 package com.catnbear.database;
 
+import com.catnbear.database.table.TableCell;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 public class Budget {
 
@@ -101,6 +99,18 @@ public class Budget {
         }
         for (int columnIndex = 1; columnIndex <= BUDGET_COLUMN_AMOUNT; columnIndex++) {
             if (!resultSetMetaData.getColumnName(columnIndex).equals(TABLE_COLUMNS_NAMES[columnIndex - 1])) {
+                return TableValidator.TABLE_INVALID;
+            }
+        }
+        return TableValidator.TABLE_VALID;
+    }
+
+    public static TableValidator validateTable(List<TableCell> tableCellsList) {
+        if (tableCellsList.size() != BUDGET_COLUMN_AMOUNT) {
+            return TableValidator.TABLE_INVALID;
+        }
+        for (int columnIndex = 0; columnIndex <= BUDGET_COLUMN_AMOUNT; columnIndex++) {
+            if(!tableCellsList.get(columnIndex).getColumnName().equals(TABLE_COLUMNS_NAMES[columnIndex])) {
                 return TableValidator.TABLE_INVALID;
             }
         }

@@ -20,7 +20,7 @@ public class ColumnValue {
         this.value = value;
     }
 
-    public String toString() {
+    public String getValue() {
         String result = "";
         switch (columnType) {
             case STRING:
@@ -35,5 +35,13 @@ public class ColumnValue {
                 break;
         }
         return result;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String toString() {
+        return getValue();
     }
 }
