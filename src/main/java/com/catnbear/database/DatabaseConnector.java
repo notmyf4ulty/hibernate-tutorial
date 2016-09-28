@@ -44,6 +44,38 @@ public class DatabaseConnector {
         return connection;
     }
 
+    public ResultSet executeReadQuery(String query) throws SQLException {
+        ResultSet resultSet = null;
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return resultSet;
+    }
+
+    public int executeWriteQuery(String query) throws  SQLException {
+        int rowsAffected = -1;
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            rowsAffected = statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return rowsAffected;
+    }
+
     public Connection getConnection() {
         return connection;
     }

@@ -3,7 +3,7 @@ package com.catnbear.database.query;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Query {
+ class Query {
 
     protected String datbaseName;
     protected String tableName;
@@ -27,7 +27,9 @@ public abstract class Query {
         }
     }
 
-    public abstract String toExecutableString();
+    public String toExecutableString() {
+        return "";
+    }
 
     public String getDatbaseName() {
         return datbaseName;
