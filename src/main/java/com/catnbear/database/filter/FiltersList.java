@@ -47,8 +47,12 @@ public class FiltersList {
         this.filterListType = filterListType;
     }
 
-    public void addFilter(Filter filter) {
+    public void add(Filter filter) {
         filterList.add(filter);
+    }
+
+    public void add(Filter ... filters) {
+        Collections.addAll(filterList, filters);
     }
 
     public String toQueryString() {

@@ -1,22 +1,26 @@
 package com.catnbear.database.query;
 
+import com.catnbear.database.DatabaseConnector;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
- class Query {
+class Query {
 
-    protected String datbaseName;
+    protected String databaseName;
     protected String tableName;
     protected List<String> columnsList;
 
     protected Query() {
-        this.datbaseName = "";
+        this.databaseName = "";
         this.tableName = "";
         this.columnsList = new ArrayList<>();
     }
 
     protected Query(String databaseName, String tableName) {
-        this.datbaseName = databaseName;
+        this.databaseName = databaseName;
         this.tableName = tableName;
         this.columnsList = new ArrayList<>();
     }
@@ -27,16 +31,27 @@ import java.util.List;
         }
     }
 
+    public ResultSet selectAll() {
+        DatabaseConnector connector = DatabaseConnector.getInstance();
+        ResultSet resultSet = null;
+        try {
+            connector.executeReadQuery("SELECT * FROM " + databaseName + "." + tableName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
     public String toExecutableString() {
         return "";
     }
 
-    public String getDatbaseName() {
-        return datbaseName;
+    public String getDatabaseName() {
+        return databaseName;
     }
 
-    public void setDatbaseName(String datbaseName) {
-        this.datbaseName = datbaseName;
+    public void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
     }
 
     public String getTableName() {

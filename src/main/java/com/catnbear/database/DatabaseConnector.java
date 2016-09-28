@@ -4,12 +4,15 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Vector;
 
 public class DatabaseConnector {
 
     private static DatabaseConnector instance = null;
     private Connection connection;
+    private String databaseName;
+    private String tableName;
 
     private DatabaseConnector() {
         connection = establishConnection();

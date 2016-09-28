@@ -2,7 +2,6 @@ package com.catnbear.fxml;
 
 import com.catnbear.database.DataModel;
 import com.catnbear.database.filter.Filter;
-import com.catnbear.database.filter.NumericFilter;
 import com.catnbear.database.filter.StringFilter;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -31,7 +30,7 @@ public class FiltersController {
     @FXML
     private void addFilterButtonClicked() {
         Filter filter = new StringFilter(categoryTextField.getText(), valueTextField.getText());
-        dataModel.getFiltersList().addFilter(filter);
+        dataModel.getFiltersList().add(filter);
         try {
             dataModel.updateData();
         } catch (SQLException e) {

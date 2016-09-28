@@ -39,7 +39,7 @@ public class SelectQuery extends Query {
             result += "* ";
         }
 
-        result += "FROM " + datbaseName + "." + tableName + " ";
+        result += "FROM " + databaseName + "." + tableName + " ";
 
         if (!((filtersList.isEmpty()) || (filtersList == null))) {
             result += "WHERE ";

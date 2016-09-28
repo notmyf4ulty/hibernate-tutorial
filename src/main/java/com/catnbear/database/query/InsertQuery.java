@@ -1,6 +1,5 @@
 package com.catnbear.database.query;
 
-import com.catnbear.database.filter.FiltersList;
 import java.util.List;
 
 public class InsertQuery extends Query {
@@ -14,7 +13,7 @@ public class InsertQuery extends Query {
 
     @Override
     public String toExecutableString() {
-        String result = "INSERT INTO " + datbaseName + "." + tableName + " ";
+        String result = "INSERT INTO " + databaseName + "." + tableName + " ";
 
         if (!(columnsList.isEmpty() || (columnsList == null))) {
             result += "(";
