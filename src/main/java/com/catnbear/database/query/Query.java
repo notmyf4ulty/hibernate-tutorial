@@ -9,24 +9,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-class Query {
+public class Query {
 
     protected String databaseName;
     protected String tableName;
     protected List<String> columnsList;
 
-    protected Query() {
+    public Query() {
         this.databaseName = "";
         this.tableName = "";
         this.columnsList = new ArrayList<>();
     }
 
-    protected Query(String databaseName, String tableName) {
+    public Query(String databaseName, String tableName) {
         this.databaseName = databaseName;
         this.tableName = tableName;
         this.columnsList = new ArrayList<>();
     }
-    protected Query(String databaseName, String tableName, List<String> columnsList) {
+    public Query(String databaseName, String tableName, List<String> columnsList) {
         this(databaseName, tableName);
         if (columnsList != null) {
             this.columnsList = columnsList;

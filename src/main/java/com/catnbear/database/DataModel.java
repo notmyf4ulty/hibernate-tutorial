@@ -71,13 +71,13 @@ public class DataModel {
     }
 
     public void updateData() throws SQLException {
-        Query selectQuery = new SelectQuery(databaseName,tableName,filtersList);
+        SelectQuery selectQuery = new SelectQuery(databaseName,tableName,filtersList);
         System.out.println(selectQuery.toExecutableString());
             tableView.setItems(Budget.queryResultToObservableList(selectQuery.toExecutableString()));
     }
 
     public void addNewItem(List<String> valuesList) throws SQLException {
-        Query insertQuery = new InsertQuery(databaseName,tableName,visibleColumnsList,valuesList);
+        InsertQuery insertQuery = new InsertQuery(databaseName,tableName,visibleColumnsList,valuesList);
         System.out.println(insertQuery.toExecutableString());
         Budget.queryResultToObservableList(insertQuery.toExecutableString());
         updateData();
