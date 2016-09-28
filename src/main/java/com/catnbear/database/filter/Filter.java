@@ -1,16 +1,25 @@
 package com.catnbear.database.filter;
-public abstract class Filter {
+
+import com.catnbear.database.table.ColumnValue;
+import com.catnbear.database.table.TableCell;
+
+public class Filter {
     protected String columnName;
     protected String cellValue;
-
-    protected Filter() {}
+    private ColumnValue columnValue;
 
     protected Filter(String columnName, String cellValue) {
         this.columnName = columnName;
         this.cellValue = cellValue;
     }
 
-    public abstract String toQueryString();
+    public Filter(ColumnValue columnValue) {
+        this.columnValue = columnValue;
+    }
+
+    public String toQueryString() {
+        return "(" + columnName + "=" + columnValue.toString() + ")";
+    }
 
     public String getColumnName() {
         return columnName;

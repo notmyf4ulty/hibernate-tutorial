@@ -1,6 +1,7 @@
 package com.catnbear.database.query;
 
 import com.catnbear.database.DatabaseConnector;
+import com.catnbear.database.filter.Filter;
 import com.catnbear.database.filter.FiltersList;
 
 import java.sql.ResultSet;
@@ -101,9 +102,32 @@ class Query {
         return affectedRows;
     }
 
-    public int remove(String columnName, String columnValue) {
-        String query = "REMOVE FROM " + databaseName + "." + tableName + " WHERE "
-                + "\""
+    public int remove(Filter filter) {
+        String query = "REMOVE FROM " + databaseName + "." + tableName + " WHERE " + filter.toQueryString() + ";";
+
+        DatabaseConnector connector = DatabaseConnector.getInstance();
+        int affectedRows = -1;
+        try {
+            affectedRows = connector.executeWriteQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return affectedRows;
+    }
+
+    public int remove(FiltersList filtersList) {
+        String query = "REMOVE FROM " + databaseName + "." + tableName + " WHERE " + filtersList.toQueryString() + ";";
+
+        DatabaseConnector connector = DatabaseConnector.getInstance();
+        int affectedRows = -1;
+        try {
+            affectedRows = connector.executeWriteQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return affectedRows;
     }
 
     public String toExecutableString() {
