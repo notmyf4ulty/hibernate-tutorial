@@ -1,9 +1,9 @@
 package com.catnbear.database.table;
 
 public class TableCell {
-    String columnName;
-    ColumnType columnType;
-    String cellValue;
+    private String columnName;
+    private ColumnType columnType;
+    private String cellValue;
 
     private enum ColumnType {
         STRING,

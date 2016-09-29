@@ -1,6 +1,7 @@
 package com.catnbear.database;
 
 import com.catnbear.database.table.TableCell;
+import com.catnbear.database.table.TableColumn;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,14 +13,14 @@ import java.util.*;
 public class BudgetItem {
 
     private static final String [] TABLE_COLUMNS_NAMES = {
-        "id",
-        "date",
-        "counterparty",
-        "category",
-        "subcategory",
-        "description",
-        "type",
-        "amount"
+            "id",
+            "date",
+            "counterparty",
+            "category",
+            "subcategory",
+            "description",
+            "type",
+            "amount"
     };
 
     private static final int BUDGET_COLUMN_AMOUNT = TABLE_COLUMNS_NAMES.length;
@@ -39,14 +40,24 @@ public class BudgetItem {
         }
     }
 
-    private final int ID_COLUMN_INDEX = 1;
-    private final int DATE_COLUMN_INDEX = 2;
-    private final int COUNTERPARTY_COLUMN_INDEX = 3;
-    private final int CATEGORY_COLUMN_INDEX = 4;
-    private final int SUBCATEGORY_COLUMN_INDEX = 5;
-    private final int DESCRIPTION_COLUMN_INDEX = 6;
-    private final int TYPE_COLUMN_INDEX = 7;
-    private final int AMOUNT_COLUMN_INDEX = 8;
+    private static final TableColumn ID_COLUMN = new TableColumn("id",0);
+    private static final TableColumn DATE_COLUMN = new TableColumn("date",1);
+    private static final TableColumn COUNTERPARTY_COLUMN = new TableColumn("counterparty",2);
+    private static final TableColumn CATEGORY_COLUMN = new TableColumn("category",3);
+    private static final TableColumn SUBCATEGORY_COLUMN = new TableColumn("subcategory",4);
+    private static final TableColumn DESCRIPTION_COLUMN = new TableColumn("description",5);
+    private static final TableColumn TYPE_COLUMN = new TableColumn("type",6);
+    private static final TableColumn AMOUNT_COLUMN = new TableColumn("amount",7);
+    private static final List<TableColumn> COLUMNS_LIST = new ArrayList<>(Arrays.asList(
+            ID_COLUMN,
+            DATE_COLUMN,
+            COUNTERPARTY_COLUMN,
+            CATEGORY_COLUMN,
+            SUBCATEGORY_COLUMN,
+            DESCRIPTION_COLUMN,
+            TYPE_COLUMN,
+            AMOUNT_COLUMN
+    ));
 
     private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
     private final SimpleStringProperty date = new SimpleStringProperty("");
@@ -61,14 +72,14 @@ public class BudgetItem {
 
     public BudgetItem(ResultSet resultSet) throws SQLException {
         if (validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
-            id.set(resultSet.getInt(ID_COLUMN_INDEX));
-            date.set(resultSet.getString(DATE_COLUMN_INDEX));
-            counterParty.set(resultSet.getString(COUNTERPARTY_COLUMN_INDEX));
-            category.set(resultSet.getString(CATEGORY_COLUMN_INDEX));
-            subcategory.set(resultSet.getString(SUBCATEGORY_COLUMN_INDEX));
-            description.set(resultSet.getString(DESCRIPTION_COLUMN_INDEX));
-            type.set(resultSet.getString(TYPE_COLUMN_INDEX));
-            amount.set(resultSet.getDouble(AMOUNT_COLUMN_INDEX));
+            id.set(resultSet.getInt(ID_COLUMN.getResultSetIndex()));
+            date.set(resultSet.getString(DATE_COLUMN.getResultSetIndex()));
+            counterParty.set(resultSet.getString(COUNTERPARTY_COLUMN.getResultSetIndex()));
+            category.set(resultSet.getString(CATEGORY_COLUMN.getResultSetIndex()));
+            subcategory.set(resultSet.getString(SUBCATEGORY_COLUMN.getResultSetIndex()));
+            description.set(resultSet.getString(DESCRIPTION_COLUMN.getResultSetIndex()));
+            type.set(resultSet.getString(TYPE_COLUMN.getResultSetIndex()));
+            amount.set(resultSet.getDouble(AMOUNT_COLUMN.getResultSetIndex()));
         }
         else {
             System.out.println("En error occured during creation of the BudgetItem object.");
@@ -121,18 +132,6 @@ public class BudgetItem {
         }
 
         return FXCollections.observableArrayList(budgetItemList);
-    }
-
-    public String toString() {
-        return
-                id + " " +
-                date + " " +
-                counterParty + " " +
-                category + " " +
-                subcategory + " " +
-                description + " " +
-                type + " " +
-                amount;
     }
 
     public int getId() {

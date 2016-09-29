@@ -12,7 +12,7 @@
       stylesheets="@/css/addnewitemdialog.css"
       fx:id="addNewItemDialog"
       minHeight="250">
-    
+
     <HBox>
         <Label text="Date: "/>
         <DatePicker fx:id="datePicker"/>

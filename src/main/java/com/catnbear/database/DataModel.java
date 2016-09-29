@@ -12,26 +12,6 @@ public class DataModel {
     private TableView<BudgetItem> tableView;
     private String databaseName;
     private String tableName;
-
-    private final String ID_COLUMN = "id";
-    private final String DATE_COLUMN = "date";
-    private final String COUNTERPARTY_COLUMN = "counterparty";
-    private final String CATEGORY_COLUMN = "category";
-    private final String SUBCATEGORY_COLUMN = "subcategory";
-    private final String DESCRIPTION_COLUMN = "description";
-    private final String TYPE_COLUMN = "type";
-    private final String AMOUNT_COLUMN = "amount";
-    private final List<String> visibleColumnsList = new ArrayList<>(Arrays.asList(
-            new String [] {
-                    DATE_COLUMN,
-                    COUNTERPARTY_COLUMN,
-                    CATEGORY_COLUMN,
-                    SUBCATEGORY_COLUMN,
-                    DESCRIPTION_COLUMN,
-                    TYPE_COLUMN,
-                    AMOUNT_COLUMN
-            }));
-
     private FiltersList filtersList;
 
     private DataModel() {
@@ -54,10 +34,6 @@ public class DataModel {
     }
 
     public void addNewItem(List<TableCell> tableCellsList) throws SQLException {
-//        InsertQuery insertQuery = new InsertQuery(databaseName,tableName,visibleColumnsList,valuesList);
-//        System.out.println(insertQuery.toExecutableString());
-//        BudgetItem.queryResultToObservableList(insertQuery.toExecutableString());
-//        updateData();
         Query query = new Query(databaseName,tableName);
         query.insert(tableCellsList);
         updateData();
