@@ -12,8 +12,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.sql.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class StartLayoutController {
+public class StartLayoutController implements Observer {
 
     @FXML
     private TableView<BudgetItem> tableView;
@@ -65,6 +67,10 @@ public class StartLayoutController {
         GuiModifier.openNewWindow("/fxml/filtersdialog.fxml",this);
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 
     private Node getChildOfId(Pane pane, String id) {
         ObservableList<Node> children = pane.getChildren();

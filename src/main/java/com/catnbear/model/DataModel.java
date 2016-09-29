@@ -3,6 +3,8 @@ package com.catnbear.model;
 import com.catnbear.utlilities.database.FiltersList;
 import com.catnbear.utlilities.database.Query;
 import com.catnbear.utlilities.database.TableCell;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import java.sql.SQLException;
 import java.util.*;
@@ -30,7 +32,7 @@ public class DataModel {
 
     public void updateData() throws SQLException {
         Query query = new Query(databaseName,tableName);
-        tableView.setItems(BudgetItem.resultSetToBudgetItemList(query.select(filtersList)));
+        tableView.setItems(BudgetItem.resultSetToItemObservableList(query.select(filtersList)));
     }
 
     public void addNewItem(List<TableCell> tableCellsList) throws SQLException {
@@ -46,12 +48,32 @@ public class DataModel {
         updateData();
     }
 
+    public void addFilter(TableCell tableCell) throws SQLException {
+        filtersList.add(tableCell);
+        updateData();
+    }
+
+    public void clearFilters() throws SQLException {
+        filtersList.clear();
+        updateData();
+    }
+
+    public void removeFilter(int index) throws SQLException {
+        filtersList.remove(index);
+        updateData();
+    }
+
     public TableView getTableView() {
         return tableView;
     }
 
     public void setTableView(TableView<BudgetItem> tableView) {
         this.tableView = tableView;
+        try {
+            updateData();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public FiltersList getFiltersList() {

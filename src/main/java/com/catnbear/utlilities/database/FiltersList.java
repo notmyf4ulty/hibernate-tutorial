@@ -1,5 +1,8 @@
 package com.catnbear.utlilities.database;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import static com.catnbear.utlilities.database.FiltersList.FilterListType.*;
@@ -8,7 +11,7 @@ public class FiltersList {
 
     private ArrayList<TableCell> filterList;
 
-    public enum FilterListType {
+    enum FilterListType {
         OR(" OR "),
         AND(" AND ");
 
@@ -55,7 +58,15 @@ public class FiltersList {
         Collections.addAll(filterList, filters);
     }
 
-    public String toQueryString() {
+    public void clear() {
+        filterList.clear();
+    }
+    
+    public void remove(int index) {
+        filterList.remove(index);
+    }
+
+    String toQueryString() {
         String result = "";
         if (!filterList.isEmpty()) {
             result += "(";
@@ -71,7 +82,15 @@ public class FiltersList {
         return result;
     }
 
-    public boolean isEmpty() {
+    public ObservableList toObservableList() {
+        ArrayList<String> filters = new ArrayList<String>();
+        for (TableCell item : filterList) {
+            filters.add(item.toString());
+        }
+        return FXCollections.observableArrayList(filters);
+    }
+
+    boolean isEmpty() {
         return filterList.isEmpty();
     }
 }

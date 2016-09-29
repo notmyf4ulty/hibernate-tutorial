@@ -66,7 +66,7 @@ public class BudgetItem {
         return tableCellsList;
     }
 
-    static ObservableList<BudgetItem> resultSetToBudgetItemList(ResultSet resultSet) throws SQLException {
+    static ObservableList<BudgetItem> resultSetToItemObservableList(ResultSet resultSet) throws SQLException {
         List<BudgetItem> budgetItemList = new ArrayList<>();
         if(validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
             while (resultSet.next()) {
