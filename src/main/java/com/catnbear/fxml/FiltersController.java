@@ -22,8 +22,6 @@ public class FiltersController {
     @FXML
     public void initialize() {
         dataModel = DataModel.getInstance();
-        dataModel.getDataFilter().setDatabaseName("wimm");
-        dataModel.getDataFilter().setTableName("notmyf4ulty_budget");
         updateFiltersListView();
     }
 
@@ -36,29 +34,12 @@ public class FiltersController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        updateFiltersListView();
     }
 
     @FXML
-    private void resetFiltersButtonClicked() {
-//        dataModel.getDataFilter().resetFilters();
-//        System.out.println(dataModel.getDataFilter().getAllFilters());
-//        try {
-//            dataModel.showData(dataModel
-//                    .getDataFilter()
-//                    .getFilterToQuery());
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        updateFiltersListView();
-    }
+    private void resetFiltersButtonClicked() {}
 
-    private void updateFiltersListView() {
-        filtersListView.setItems(
-                FXCollections.observableArrayList(
-                        dataModel
-                                .getDataFilter()
-                                .getAllFilters()
-                                .toArray()));
-    }
+    private void updateFiltersListView() {}
 }
 

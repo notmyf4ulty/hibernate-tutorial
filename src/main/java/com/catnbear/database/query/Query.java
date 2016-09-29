@@ -100,8 +100,6 @@ public class Query {
     public int delete(TableCell tableCell) {
         String query = "DELETE FROM " + databaseName + "." + tableName + " WHERE " + tableCell.toString() + ";";
 
-        System.out.println(query);
-
         DatabaseConnector connector = DatabaseConnector.getInstance();
         int affectedRows = -1;
         try {

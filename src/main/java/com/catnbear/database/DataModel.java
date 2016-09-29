@@ -4,16 +4,13 @@ import com.catnbear.database.filter.FiltersList;
 import com.catnbear.database.query.InsertQuery;
 import com.catnbear.database.query.Query;
 import com.catnbear.database.table.TableCell;
-import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import java.sql.SQLException;
 import java.util.*;
 
 public class DataModel {
     private static DataModel instance = null;
-    private ObservableList<Budget> budgetList;
     private TableView<Budget> tableView;
-    private DataFilter dataFilter;
     private String databaseName;
     private String tableName;
 
@@ -42,24 +39,7 @@ public class DataModel {
         filtersList = new FiltersList();
         databaseName = "wimm";
         tableName = "notmyf4ulty_budget";
-
         tableView = new TableView<>();
-        dataFilter = new DataFilter();
-
-        dataFilter.setDatabaseName(databaseName);
-        dataFilter.setTableName(tableName);
-
-        try {
-            updateBudgetList();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            updateData();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public static DataModel getInstance() {
@@ -81,32 +61,19 @@ public class DataModel {
         updateData();
     }
 
-    public TableView getTableView() {
-        return tableView;
-    }
-
-    public void setTableView(TableView<Budget> tableView) {
-        this.tableView = tableView;
-    }
-
-    private void updateBudgetList() throws SQLException {
-        budgetList = Budget.queryResultToObservableList(
-                "SELECT * FROM " + databaseName + "." + tableName + ";");
-    }
-
-    public void removeFromTable(int id) throws SQLException {
+    public void removeItem(int id) throws SQLException {
         Query query = new Query(databaseName,tableName);
         TableCell tableCell = new TableCell("id",id);
         query.delete(tableCell);
         updateData();
     }
 
-    public DataFilter getDataFilter() {
-        return dataFilter;
+    public TableView getTableView() {
+        return tableView;
     }
 
-    public void setDataFilter(DataFilter dataFilter) {
-        this.dataFilter = dataFilter;
+    public void setTableView(TableView<Budget> tableView) {
+        this.tableView = tableView;
     }
 
     public FiltersList getFiltersList() {

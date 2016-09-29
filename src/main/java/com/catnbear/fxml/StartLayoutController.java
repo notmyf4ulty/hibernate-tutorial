@@ -2,17 +2,15 @@ package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
 import com.catnbear.database.DataModel;
-import com.catnbear.database.query.Query;
 import com.catnbear.utlilities.GuiModifier;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import java.io.IOException;
+
 import java.sql.*;
 
 public class StartLayoutController {
@@ -33,8 +31,6 @@ public class StartLayoutController {
     public void initialize() {
         dataModel = DataModel.getInstance();
         dataModel.setTableView(tableView);
-        dataModel.getDataFilter().setTableName("notmyf4ulty_budget");
-        dataModel.getDataFilter().setDatabaseName("wimm");
     }
 
     public TableView<Budget> getTableView() {
@@ -95,7 +91,7 @@ public class StartLayoutController {
     private void removeSelectedItem() {
         int index = Integer.parseInt(tableView.getSelectionModel().getSelectedItem().getId());
         try {
-            dataModel.removeFromTable(index);
+            dataModel.removeItem(index);
         } catch (SQLException e) {
             e.printStackTrace();
         }
