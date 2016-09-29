@@ -1,7 +1,6 @@
 package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
-import com.catnbear.database.table.ColumnValue;
 import com.catnbear.database.DataModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -57,18 +56,13 @@ public class addEntryBoxController {
 
     private List<String> getTextFieldsToValuesList() {
         List<String> valuesList = new ArrayList<String>();
-        valuesList.add("\"" + datePicker.getValue().toString() + "\"");
-        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, counterPartyTextField));
-        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, categoryTextField));
-        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, subcategoryTextField));
-        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, descriptionTextField));
-        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, typeTextField));
-        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.NUMBER, amountTextField));
+//        valuesList.add("\"" + datePicker.getValue().toString() + "\"");
+//        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, counterPartyTextField));
+//        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, categoryTextField));
+//        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, subcategoryTextField));
+//        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, descriptionTextField));
+//        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.STRING, typeTextField));
+//        valuesList.add(textFiledToColumnValue(ColumnValue.ColumnType.NUMBER, amountTextField));
         return valuesList;
-    }
-
-    private String textFiledToColumnValue(ColumnValue.ColumnType columnType, TextField textField) {
-        ColumnValue columnValue = new ColumnValue(columnType, textField.getText());
-        return columnValue.toString();
     }
 }

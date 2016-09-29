@@ -5,16 +5,9 @@ public class TableCell {
     ColumnType columnType;
     String cellValue;
 
-    ColumnValue columnValue;
-
     private enum ColumnType {
         STRING,
         NUMBER
-    }
-
-    public TableCell(String columnName, ColumnValue columnValue) {
-        this.columnName = columnName;
-        this.columnValue = columnValue;
     }
 
     public TableCell(String columnName, String cellValue) {
@@ -37,14 +30,7 @@ public class TableCell {
 
     public String toString() {
         String result = "(" + columnName + "=";
-        switch (columnType) {
-            case STRING:
-                result += "\"" + cellValue + "\"";
-                break;
-            case NUMBER:
-                result += cellValue;
-                break;
-        }
+        result += getCellValue();
         result += ")";
         return result;
     }
@@ -57,11 +43,20 @@ public class TableCell {
         this.columnName = columnName;
     }
 
-    public ColumnValue getColumnValue() {
-        return columnValue;
+    public String getCellValue() {
+        String result = "";
+        switch (columnType) {
+            case STRING:
+                result = "\"" + cellValue + "\"";
+                break;
+            case NUMBER:
+                result = cellValue;
+                break;
+        }
+        return result;
     }
 
-    public void setColumnValue(ColumnValue columnValue) {
-        this.columnValue = columnValue;
+    public void setCellValue(String cellValue) {
+        this.cellValue = cellValue;
     }
 }

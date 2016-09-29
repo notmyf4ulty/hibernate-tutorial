@@ -74,7 +74,7 @@ public class Query {
             query += ") VALUES (";
 
             for (TableCell tableCell : tableCellsList) {
-                query += tableCell.getColumnValue().getValue();
+                query += tableCell.getCellValue();
                 if (tableCellsList.indexOf(tableCell) < (tableCellsList.size() - 1)) {
                     query += ",";
                 }
