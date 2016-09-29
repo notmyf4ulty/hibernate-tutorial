@@ -48,18 +48,8 @@ public class DatabaseConnector {
     }
 
     public ResultSet executeReadQuery(String query) throws SQLException {
-        ResultSet resultSet = null;
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-        }
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
         return resultSet;
     }
 

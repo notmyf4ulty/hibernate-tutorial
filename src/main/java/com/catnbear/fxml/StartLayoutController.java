@@ -2,6 +2,7 @@ package com.catnbear.fxml;
 
 import com.catnbear.database.Budget;
 import com.catnbear.database.DataModel;
+import com.catnbear.database.query.Query;
 import com.catnbear.utlilities.GuiModifier;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

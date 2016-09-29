@@ -71,9 +71,8 @@ public class DataModel {
     }
 
     public void updateData() throws SQLException {
-        SelectQuery selectQuery = new SelectQuery(databaseName,tableName,filtersList);
-        System.out.println(selectQuery.toExecutableString());
-            tableView.setItems(Budget.queryResultToObservableList(selectQuery.toExecutableString()));
+        Query query = new Query(databaseName,tableName);
+        tableView.setItems(Budget.resultSetToList(query.selectAll()));
     }
 
     public void addNewItem(List<String> valuesList) throws SQLException {

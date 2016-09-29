@@ -134,6 +134,18 @@ public class Budget {
         return list;
     }
 
+    public static ObservableList<Budget> resultSetToList(ResultSet resultSet) throws SQLException {
+        List<Budget> budgetList = new ArrayList<>();
+
+        if(validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
+            while (resultSet.next()) {
+                budgetList.add(new Budget(resultSet));
+            }
+        }
+
+        return FXCollections.observableArrayList(budgetList);
+    }
+
     public void queryUpdate() {
         try {
             DatabaseConnector
