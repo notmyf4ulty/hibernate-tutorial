@@ -10,7 +10,7 @@ import java.util.*;
 
 public class DataModel {
     private static DataModel instance = null;
-    private TableView<Budget> tableView;
+    private TableView<BudgetItem> tableView;
     private String databaseName;
     private String tableName;
 
@@ -51,13 +51,13 @@ public class DataModel {
 
     public void updateData() throws SQLException {
         Query query = new Query(databaseName,tableName);
-        tableView.setItems(Budget.resultSetToList(query.selectAll()));
+        tableView.setItems(BudgetItem.resultSetToList(query.selectAll()));
     }
 
     public void addNewItem(List<String> valuesList) throws SQLException {
         InsertQuery insertQuery = new InsertQuery(databaseName,tableName,visibleColumnsList,valuesList);
         System.out.println(insertQuery.toExecutableString());
-        Budget.queryResultToObservableList(insertQuery.toExecutableString());
+        BudgetItem.queryResultToObservableList(insertQuery.toExecutableString());
         updateData();
     }
 
@@ -72,7 +72,7 @@ public class DataModel {
         return tableView;
     }
 
-    public void setTableView(TableView<Budget> tableView) {
+    public void setTableView(TableView<BudgetItem> tableView) {
         this.tableView = tableView;
     }
 

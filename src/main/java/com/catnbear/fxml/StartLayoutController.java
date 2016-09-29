@@ -1,6 +1,6 @@
 package com.catnbear.fxml;
 
-import com.catnbear.database.Budget;
+import com.catnbear.database.BudgetItem;
 import com.catnbear.database.DataModel;
 import com.catnbear.utlilities.GuiModifier;
 import javafx.collections.ObservableList;
@@ -16,7 +16,7 @@ import java.sql.*;
 public class StartLayoutController {
 
     @FXML
-    private TableView<Budget> tableView;
+    private TableView<BudgetItem> tableView;
 
     @FXML
     private VBox mainPane;
@@ -33,7 +33,7 @@ public class StartLayoutController {
         dataModel.setTableView(tableView);
     }
 
-    public TableView<Budget> getTableView() {
+    public TableView<BudgetItem> getTableView() {
         return tableView;
     }
 

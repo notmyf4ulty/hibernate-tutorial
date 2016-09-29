@@ -4,16 +4,26 @@ import com.catnbear.database.table.TableCell;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
 
 import java.sql.*;
 import java.util.*;
 
-public class Budget {
+public class BudgetItem {
 
-    public static final int BUDGET_COLUMN_AMOUNT = 8;
+    private static final String [] TABLE_COLUMNS_NAMES = {
+        "id",
+        "date",
+        "counterparty",
+        "category",
+        "subcategory",
+        "description",
+        "type",
+        "amount"
+    };
 
-    public enum TableValidator {
+    private static final int BUDGET_COLUMN_AMOUNT = TABLE_COLUMNS_NAMES.length;
+
+    private enum TableValidator {
         TABLE_VALID("TABLE_VALID"),
         TABLE_INVALID("TABLE_INVALID");
 
@@ -27,16 +37,6 @@ public class Budget {
             return fieldDescription;
         }
     }
-    private static final String [] TABLE_COLUMNS_NAMES = {
-        "id",
-        "date",
-        "counterparty",
-        "category",
-        "subcategory",
-        "description",
-        "type",
-        "amount"
-    };
 
     private final int ID_COLUMN_INDEX = 1;
     private final int DATE_COLUMN_INDEX = 2;
@@ -56,9 +56,9 @@ public class Budget {
     private final SimpleStringProperty type = new SimpleStringProperty("");
     private final SimpleStringProperty amount = new SimpleStringProperty("");
 
-    public Budget() {}
+    public BudgetItem() {}
 
-    public Budget(ResultSet resultSet) throws SQLException {
+    public BudgetItem(ResultSet resultSet) throws SQLException {
         if (validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
             id.set(resultSet.getString(ID_COLUMN_INDEX));
             date.set(resultSet.getString(DATE_COLUMN_INDEX));
@@ -70,7 +70,7 @@ public class Budget {
             amount.set(resultSet.getString(AMOUNT_COLUMN_INDEX));
         }
         else {
-            System.out.println("En error occured during creation of the Budget object.");
+            System.out.println("En error occured during creation of the BudgetItem object.");
         }
     }
 
@@ -117,33 +117,33 @@ public class Budget {
         return TableValidator.TABLE_VALID;
     }
 
-    public static ObservableList<Budget> queryResultToObservableList(String query) throws SQLException {
+    public static ObservableList<BudgetItem> queryResultToObservableList(String query) throws SQLException {
         ResultSet resultSet = DatabaseConnector
                 .getInstance()
                 .getConnection()
                 .createStatement()
                 .executeQuery(query);
-        Vector<Budget> budgetVector = new Vector<Budget>();
+        Vector<BudgetItem> budgetItemVector = new Vector<BudgetItem>();
 
         if(validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
             while (resultSet.next()) {
-                budgetVector.add(new Budget(resultSet));
+                budgetItemVector.add(new BudgetItem(resultSet));
             }
         }
-        ObservableList<Budget> list = FXCollections.observableArrayList(new ArrayList<Budget>(budgetVector));
+        ObservableList<BudgetItem> list = FXCollections.observableArrayList(new ArrayList<BudgetItem>(budgetItemVector));
         return list;
     }
 
-    public static ObservableList<Budget> resultSetToList(ResultSet resultSet) throws SQLException {
-        List<Budget> budgetList = new ArrayList<>();
+    public static ObservableList<BudgetItem> resultSetToList(ResultSet resultSet) throws SQLException {
+        List<BudgetItem> budgetItemList = new ArrayList<>();
 
         if(validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
             while (resultSet.next()) {
-                budgetList.add(new Budget(resultSet));
+                budgetItemList.add(new BudgetItem(resultSet));
             }
         }
 
-        return FXCollections.observableArrayList(budgetList);
+        return FXCollections.observableArrayList(budgetItemList);
     }
 
     public void queryUpdate() {

@@ -1,6 +1,6 @@
 package com.catnbear.fxml;
 
-import com.catnbear.database.Budget;
+import com.catnbear.database.BudgetItem;
 import com.catnbear.database.DataModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,16 +32,16 @@ public class addEntryBoxController {
     }
 
     @FXML private void addBudgetButtonClicked() {
-        Budget budget = new Budget();
-        budget.setDate(datePicker.getValue().toString());
-        budget.setCounterParty(counterPartyTextField.getText());
-        budget.setCategory(categoryTextField.getText());
-        budget.setSubcategory(subcategoryTextField.getText());
-        budget.setDescription(descriptionTextField.getText());
-        budget.setType(typeTextField.getText());
-        budget.setAmount(amountTextField.getText());
-        System.out.println(budget.toQuery());
-        budget.queryUpdate();
+        BudgetItem budgetItem = new BudgetItem();
+        budgetItem.setDate(datePicker.getValue().toString());
+        budgetItem.setCounterParty(counterPartyTextField.getText());
+        budgetItem.setCategory(categoryTextField.getText());
+        budgetItem.setSubcategory(subcategoryTextField.getText());
+        budgetItem.setDescription(descriptionTextField.getText());
+        budgetItem.setType(typeTextField.getText());
+        budgetItem.setAmount(amountTextField.getText());
+        System.out.println(budgetItem.toQuery());
+        budgetItem.queryUpdate();
         try {
             DataModel.getInstance().updateData();
         } catch (SQLException e) {
