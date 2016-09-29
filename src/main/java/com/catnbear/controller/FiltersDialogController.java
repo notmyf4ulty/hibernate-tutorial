@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
-public class FiltersController {
+public class FiltersDialogController {
     @FXML private TextField categoryTextField;
     @FXML private TextField valueTextField;
 

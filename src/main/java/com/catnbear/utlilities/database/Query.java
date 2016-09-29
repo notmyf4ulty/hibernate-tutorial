@@ -1,34 +1,23 @@
 package com.catnbear.utlilities.database;
 
 import com.catnbear.model.DatabaseConnector;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Query {
 
-    protected String databaseName;
-    protected String tableName;
-    protected List<String> columnsList;
+    private String databaseName;
+    private String tableName;
 
     public Query() {
         this.databaseName = "";
         this.tableName = "";
-        this.columnsList = new ArrayList<>();
     }
 
     public Query(String databaseName, String tableName) {
         this.databaseName = databaseName;
         this.tableName = tableName;
-        this.columnsList = new ArrayList<>();
-    }
-    public Query(String databaseName, String tableName, List<String> columnsList) {
-        this(databaseName, tableName);
-        if (columnsList != null) {
-            this.columnsList = columnsList;
-        }
     }
 
     public ResultSet selectAll() {
@@ -83,9 +72,7 @@ public class Query {
         } else {
             query = "";
         }
-
         query += ";";
-        System.out.println(query);
 
         DatabaseConnector connector = DatabaseConnector.getInstance();
         int affectedRows = -1;
@@ -113,7 +100,11 @@ public class Query {
     }
 
     public int delete(FiltersList filtersList) {
-        String query = "DELETE FROM " + databaseName + "." + tableName + " WHERE " + filtersList.toQueryString() + ";";
+        String query = "DELETE FROM " + databaseName + "." + tableName;
+        if(!filtersList.isEmpty()) {
+            query += " WHERE " + filtersList.toQueryString();
+        }
+        query += ";";
 
         DatabaseConnector connector = DatabaseConnector.getInstance();
         int affectedRows = -1;
@@ -124,10 +115,6 @@ public class Query {
         }
 
         return affectedRows;
-    }
-
-    public String toExecutableString() {
-        return "";
     }
 
     public String getDatabaseName() {
@@ -144,13 +131,5 @@ public class Query {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
-    }
-
-    public List<String> getColumnsList() {
-        return columnsList;
-    }
-
-    public void setColumnsList(List<String> columnsList) {
-        this.columnsList = columnsList;
     }
 }

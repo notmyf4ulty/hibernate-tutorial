@@ -62,7 +62,7 @@ public class StartLayoutController {
 
     @FXML
     private void filtersButtonClicked() {
-        GuiModifier.openNewWindow("/fxml/filters.fxml",this);
+        GuiModifier.openNewWindow("/fxml/filtersdialog.fxml",this);
     }
 
 
