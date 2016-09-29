@@ -3,8 +3,7 @@ package com.catnbear.database;
 import com.catnbear.database.filter.FiltersList;
 import com.catnbear.database.query.InsertQuery;
 import com.catnbear.database.query.Query;
-import com.catnbear.database.query.SelectQuery;
-import javafx.collections.FXCollections;
+import com.catnbear.database.table.TableCell;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import java.sql.SQLException;
@@ -95,14 +94,11 @@ public class DataModel {
                 "SELECT * FROM " + databaseName + "." + tableName + ";");
     }
 
-    public void removeFromTable(int tableId) throws SQLException {
-        String query = "DELETE FROM wimm.notmyf4ulty_budget WHERE id = " + tableId + ";";
-        System.out.println(query);
-        DatabaseConnector
-                .getInstance()
-                .getConnection()
-                .createStatement()
-                .executeUpdate(query);
+    public void removeFromTable(int id) throws SQLException {
+        Query query = new Query(databaseName,tableName);
+        TableCell tableCell = new TableCell("id",id);
+        query.delete(tableCell);
+        updateData();
     }
 
     public DataFilter getDataFilter() {

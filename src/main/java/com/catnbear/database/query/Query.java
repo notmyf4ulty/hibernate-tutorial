@@ -97,8 +97,10 @@ public class Query {
         return affectedRows;
     }
 
-    public int remove(Filter filter) {
-        String query = "REMOVE FROM " + databaseName + "." + tableName + " WHERE " + filter.toQueryString() + ";";
+    public int delete(TableCell tableCell) {
+        String query = "DELETE FROM " + databaseName + "." + tableName + " WHERE " + tableCell.toString() + ";";
+
+        System.out.println(query);
 
         DatabaseConnector connector = DatabaseConnector.getInstance();
         int affectedRows = -1;
@@ -111,8 +113,8 @@ public class Query {
         return affectedRows;
     }
 
-    public int remove(FiltersList filtersList) {
-        String query = "REMOVE FROM " + databaseName + "." + tableName + " WHERE " + filtersList.toQueryString() + ";";
+    public int delete(FiltersList filtersList) {
+        String query = "DELETE FROM " + databaseName + "." + tableName + " WHERE " + filtersList.toQueryString() + ";";
 
         DatabaseConnector connector = DatabaseConnector.getInstance();
         int affectedRows = -1;
