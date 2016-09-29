@@ -44,10 +44,13 @@ public class Query {
     }
 
     public ResultSet select(FiltersList filtersList) {
+        String query = "SELECT * FROM " + databaseName + "." + tableName;
+        if(!filtersList.isEmpty()) {
+            query += " WHERE " + filtersList.toQueryString();
+        }
+        query += ";";
         DatabaseConnector connector = DatabaseConnector.getInstance();
         ResultSet resultSet = null;
-        String query = "SELECT * FROM " + databaseName + "." + tableName + " "
-                + "WHERE " + filtersList.toQueryString() + ";";
         try {
             resultSet = connector.executeReadQuery(query);
         } catch (SQLException e) {

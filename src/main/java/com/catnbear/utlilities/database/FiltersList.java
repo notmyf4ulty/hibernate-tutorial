@@ -6,7 +6,7 @@ import static com.catnbear.utlilities.database.FiltersList.FilterListType.*;
 
 public class FiltersList {
 
-    private ArrayList<Filter> filterList;
+    private ArrayList<TableCell> filterList;
 
     public enum FilterListType {
         OR(" OR "),
@@ -35,39 +35,40 @@ public class FiltersList {
         this.filterListType = filterListType;
     }
 
-    public FiltersList(Filter ... filterList) {
+    public FiltersList(TableCell ... filterList) {
         this.filterList = new ArrayList<>(filterList.length);
         Collections.addAll(this.filterList, filterList);
         this.filterListType = AND;
     }
 
-    public FiltersList(FilterListType filterListType, Filter ... filterList) {
+    public FiltersList(FilterListType filterListType, TableCell ... filterList) {
         this.filterList = new ArrayList<>(filterList.length);
         Collections.addAll(this.filterList, filterList);
         this.filterListType = filterListType;
     }
 
-    public void add(Filter filter) {
+    public void add(TableCell filter) {
         filterList.add(filter);
     }
 
-    public void add(Filter ... filters) {
+    public void add(TableCell ... filters) {
         Collections.addAll(filterList, filters);
     }
 
     public String toQueryString() {
-        String queryBody = "(";
-
-        for (Filter filter : filterList) {
-            queryBody += filter.toQueryString();
-            if (filterList.indexOf(filter) < (filterList.size() - 1)) {
-                queryBody += filterListType.toString();
-            } else {
-                queryBody += ")";
+        String result = "";
+        if (!filterList.isEmpty()) {
+            result += "(";
+            for (TableCell filter : filterList) {
+                result += filter.toString();
+                if (filterList.indexOf(filter) < (filterList.size() - 1)) {
+                    result += filterListType.toString();
+                } else {
+                    result += ")";
+                }
             }
         }
-
-        return queryBody;
+        return result;
     }
 
     public boolean isEmpty() {

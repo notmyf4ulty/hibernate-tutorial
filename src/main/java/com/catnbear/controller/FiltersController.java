@@ -1,8 +1,7 @@
 package com.catnbear.controller;
 
 import com.catnbear.model.DataModel;
-import com.catnbear.utlilities.database.Filter;
-import com.catnbear.utlilities.database.StringFilter;
+import com.catnbear.utlilities.database.TableCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -26,8 +25,9 @@ public class FiltersController {
 
     @FXML
     private void addFilterButtonClicked() {
-        Filter filter = new StringFilter(categoryTextField.getText(), valueTextField.getText());
-        dataModel.getFiltersList().add(filter);
+        TableCell tableCell = new TableCell(categoryTextField.getText(), valueTextField.getText());
+        dataModel.getFiltersList().add(tableCell);
+        System.out.println(dataModel.getFiltersList().toQueryString());
         try {
             dataModel.updateData();
         } catch (SQLException e) {
