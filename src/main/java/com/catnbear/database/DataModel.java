@@ -54,10 +54,13 @@ public class DataModel {
         tableView.setItems(BudgetItem.resultSetToList(query.selectAll()));
     }
 
-    public void addNewItem(List<String> valuesList) throws SQLException {
-        InsertQuery insertQuery = new InsertQuery(databaseName,tableName,visibleColumnsList,valuesList);
-        System.out.println(insertQuery.toExecutableString());
-        BudgetItem.queryResultToObservableList(insertQuery.toExecutableString());
+    public void addNewItem(List<TableCell> tableCellsList) throws SQLException {
+//        InsertQuery insertQuery = new InsertQuery(databaseName,tableName,visibleColumnsList,valuesList);
+//        System.out.println(insertQuery.toExecutableString());
+//        BudgetItem.queryResultToObservableList(insertQuery.toExecutableString());
+//        updateData();
+        Query query = new Query(databaseName,tableName);
+        query.insert(tableCellsList);
         updateData();
     }
 

@@ -85,6 +85,7 @@ public class Query {
         }
 
         query += ";";
+        System.out.println(query);
 
         DatabaseConnector connector = DatabaseConnector.getInstance();
         int affectedRows = -1;

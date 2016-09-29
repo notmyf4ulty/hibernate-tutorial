@@ -1,6 +1,8 @@
 package com.catnbear.database;
 
 import com.catnbear.database.table.TableCell;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,50 +49,43 @@ public class BudgetItem {
     private final int TYPE_COLUMN_INDEX = 7;
     private final int AMOUNT_COLUMN_INDEX = 8;
 
-    private final SimpleStringProperty id = new SimpleStringProperty("");
+    private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
     private final SimpleStringProperty date = new SimpleStringProperty("");
     private final SimpleStringProperty counterParty = new SimpleStringProperty("");
     private final SimpleStringProperty category = new SimpleStringProperty("");
     private final SimpleStringProperty subcategory = new SimpleStringProperty("");
     private final SimpleStringProperty description = new SimpleStringProperty("");
     private final SimpleStringProperty type = new SimpleStringProperty("");
-    private final SimpleStringProperty amount = new SimpleStringProperty("");
+    private final SimpleDoubleProperty amount = new SimpleDoubleProperty(0.0);
 
     public BudgetItem() {}
 
     public BudgetItem(ResultSet resultSet) throws SQLException {
         if (validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
-            id.set(resultSet.getString(ID_COLUMN_INDEX));
+            id.set(resultSet.getInt(ID_COLUMN_INDEX));
             date.set(resultSet.getString(DATE_COLUMN_INDEX));
             counterParty.set(resultSet.getString(COUNTERPARTY_COLUMN_INDEX));
             category.set(resultSet.getString(CATEGORY_COLUMN_INDEX));
             subcategory.set(resultSet.getString(SUBCATEGORY_COLUMN_INDEX));
             description.set(resultSet.getString(DESCRIPTION_COLUMN_INDEX));
             type.set(resultSet.getString(TYPE_COLUMN_INDEX));
-            amount.set(resultSet.getString(AMOUNT_COLUMN_INDEX));
+            amount.set(resultSet.getDouble(AMOUNT_COLUMN_INDEX));
         }
         else {
             System.out.println("En error occured during creation of the BudgetItem object.");
         }
     }
 
-    public String toQuery() {
-        return "INSERT INTO wimm.notmyf4ulty_budget (" +
-                TABLE_COLUMNS_NAMES[DATE_COLUMN_INDEX-1] + "," +
-                TABLE_COLUMNS_NAMES[COUNTERPARTY_COLUMN_INDEX-1] + "," +
-                TABLE_COLUMNS_NAMES[CATEGORY_COLUMN_INDEX-1] + "," +
-                TABLE_COLUMNS_NAMES[SUBCATEGORY_COLUMN_INDEX-1] + "," +
-                TABLE_COLUMNS_NAMES[DESCRIPTION_COLUMN_INDEX-1] + "," +
-                TABLE_COLUMNS_NAMES[TYPE_COLUMN_INDEX-1] + "," +
-                TABLE_COLUMNS_NAMES[AMOUNT_COLUMN_INDEX-1] + ")" +
-                " VALUES " + "(" +
-                "\"" + date.getValue() + "\"," +
-                "\"" + counterParty.getValue() + "\"" + "," +
-                "\"" + category.getValue() +"\"" +  "," +
-                "\"" + subcategory.getValue() +"\"" +  "," +
-                "\"" + description.getValue() +"\"" +  "," +
-                "\"" + type.getValue() +"\"" +  "," +
-                "\"" + amount.getValue() +"\"" +  ");";
+    public List<TableCell> toTableCellsList() {
+        List<TableCell> tableCellsList = new ArrayList<>();
+        tableCellsList.add(new TableCell("date",date.getValue()));
+        tableCellsList.add(new TableCell("counterparty",counterParty.getValue()));
+        tableCellsList.add(new TableCell("category",category.getValue()));
+        tableCellsList.add(new TableCell("subcategory",subcategory.getValue()));
+        tableCellsList.add(new TableCell("description",description.getValue()));
+        tableCellsList.add(new TableCell("type",type.getValue()));
+        tableCellsList.add(new TableCell("amount",amount.getValue()));
+        return tableCellsList;
     }
 
     public static TableValidator validateTable(ResultSetMetaData resultSetMetaData) throws SQLException {
@@ -117,23 +112,6 @@ public class BudgetItem {
         return TableValidator.TABLE_VALID;
     }
 
-    public static ObservableList<BudgetItem> queryResultToObservableList(String query) throws SQLException {
-        ResultSet resultSet = DatabaseConnector
-                .getInstance()
-                .getConnection()
-                .createStatement()
-                .executeQuery(query);
-        Vector<BudgetItem> budgetItemVector = new Vector<BudgetItem>();
-
-        if(validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
-            while (resultSet.next()) {
-                budgetItemVector.add(new BudgetItem(resultSet));
-            }
-        }
-        ObservableList<BudgetItem> list = FXCollections.observableArrayList(new ArrayList<BudgetItem>(budgetItemVector));
-        return list;
-    }
-
     public static ObservableList<BudgetItem> resultSetToList(ResultSet resultSet) throws SQLException {
         List<BudgetItem> budgetItemList = new ArrayList<>();
 
@@ -144,18 +122,6 @@ public class BudgetItem {
         }
 
         return FXCollections.observableArrayList(budgetItemList);
-    }
-
-    public void queryUpdate() {
-        try {
-            DatabaseConnector
-                    .getInstance()
-                    .getConnection()
-                    .createStatement()
-                    .executeUpdate(toQuery());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public String toString() {
@@ -170,15 +136,15 @@ public class BudgetItem {
                 amount;
     }
 
-    public String getId() {
+    public int getId() {
         return id.get();
     }
 
-    public SimpleStringProperty idProperty() {
+    public SimpleIntegerProperty idProperty() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id.set(id);
     }
 
@@ -254,15 +220,15 @@ public class BudgetItem {
         this.type.set(type);
     }
 
-    public String getAmount() {
+    public double getAmount() {
         return amount.get();
     }
 
-    public SimpleStringProperty amountProperty() {
+    public SimpleDoubleProperty amountProperty() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount.set(amount);
     }
 }

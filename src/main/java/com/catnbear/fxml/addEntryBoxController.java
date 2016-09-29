@@ -2,6 +2,7 @@ package com.catnbear.fxml;
 
 import com.catnbear.database.BudgetItem;
 import com.catnbear.database.DataModel;
+import com.catnbear.database.query.Query;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -39,16 +40,11 @@ public class addEntryBoxController {
         budgetItem.setSubcategory(subcategoryTextField.getText());
         budgetItem.setDescription(descriptionTextField.getText());
         budgetItem.setType(typeTextField.getText());
-        budgetItem.setAmount(amountTextField.getText());
-        System.out.println(budgetItem.toQuery());
-        budgetItem.queryUpdate();
+        budgetItem.setAmount(Integer.parseInt(amountTextField.getText()));
+
         try {
-            DataModel.getInstance().updateData();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            dataModel.addNewItem(getTextFieldsToValuesList());
+            dataModel.addNewItem(budgetItem.toTableCellsList());
+//            dataModel.updateData();
         } catch (SQLException e) {
             e.printStackTrace();
         }

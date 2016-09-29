@@ -89,7 +89,7 @@ public class StartLayoutController {
     }
 
     private void removeSelectedItem() {
-        int index = Integer.parseInt(tableView.getSelectionModel().getSelectedItem().getId());
+        int index = tableView.getSelectionModel().getSelectedItem().getId();
         try {
             dataModel.removeItem(index);
         } catch (SQLException e) {
