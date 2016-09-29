@@ -1,11 +1,6 @@
-package com.catnbear.database;
-
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
+package com.catnbear.model;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Vector;
 
 public class DatabaseConnector {
 

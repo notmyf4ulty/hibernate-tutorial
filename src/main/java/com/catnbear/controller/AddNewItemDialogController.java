@@ -1,8 +1,8 @@
-package com.catnbear.fxml;
+package com.catnbear.controller;
 
 import javafx.fxml.FXML;
-import com.catnbear.database.BudgetItem;
-import com.catnbear.database.DataModel;
+import com.catnbear.model.BudgetItem;
+import com.catnbear.model.DataModel;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import java.sql.SQLException;

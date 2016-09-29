@@ -1,9 +1,8 @@
-package com.catnbear.fxml;
+package com.catnbear.controller;
 
-import com.catnbear.database.DataModel;
-import com.catnbear.database.filter.Filter;
-import com.catnbear.database.filter.StringFilter;
-import javafx.collections.FXCollections;
+import com.catnbear.model.DataModel;
+import com.catnbear.utlilities.database.Filter;
+import com.catnbear.utlilities.database.StringFilter;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;

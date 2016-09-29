@@ -1,8 +1,8 @@
-package com.catnbear.database;
+package com.catnbear.model;
 
-import com.catnbear.database.filter.FiltersList;
-import com.catnbear.database.query.Query;
-import com.catnbear.database.table.TableCell;
+import com.catnbear.utlilities.database.FiltersList;
+import com.catnbear.utlilities.database.Query;
+import com.catnbear.utlilities.database.TableCell;
 import javafx.scene.control.TableView;
 import java.sql.SQLException;
 import java.util.*;

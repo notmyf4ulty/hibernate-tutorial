@@ -1,9 +1,6 @@
-package com.catnbear.database.query;
+package com.catnbear.utlilities.database;
 
-import com.catnbear.database.DatabaseConnector;
-import com.catnbear.database.filter.Filter;
-import com.catnbear.database.filter.FiltersList;
-import com.catnbear.database.table.TableCell;
+import com.catnbear.model.DatabaseConnector;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

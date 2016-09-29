@@ -8,7 +8,7 @@
 <?import javafx.scene.control.DatePicker?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.catnbear.fxml.AddNewItemDialogController"
+      fx:controller="com.catnbear.controller.AddNewItemDialogController"
       stylesheets="@/css/addnewitemdialog.css"
       fx:id="addNewItemDialog"
       minHeight="250">

@@ -1,8 +1,8 @@
-package com.catnbear.fxml;
+package com.catnbear.controller;
 
-import com.catnbear.database.BudgetItem;
-import com.catnbear.database.DataModel;
-import com.catnbear.utlilities.GuiModifier;
+import com.catnbear.model.BudgetItem;
+import com.catnbear.model.DataModel;
+import com.catnbear.utlilities.javafx.GuiModifier;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

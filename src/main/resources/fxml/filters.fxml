@@ -9,7 +9,7 @@
 
 <?import javafx.scene.control.ListView?>
 <VBox fx:id="filterBox" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.catnbear.fxml.FiltersController"
+      fx:controller="com.catnbear.controller.FiltersController"
       stylesheets="@/css/filters.css">
     <HBox>
         <TextField fx:id="categoryTextField"/>

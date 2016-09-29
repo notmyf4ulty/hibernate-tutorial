@@ -1,4 +1,4 @@
-package com.catnbear.database.table;
+package com.catnbear.utlilities.database;
 
 public class TableCell {
     private String columnName;

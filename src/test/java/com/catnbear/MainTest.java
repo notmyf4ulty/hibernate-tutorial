@@ -1,6 +1,6 @@
 package com.catnbear;
 
-import com.catnbear.database.filter.FiltersList;
+import com.catnbear.utlilities.database.FiltersList;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;

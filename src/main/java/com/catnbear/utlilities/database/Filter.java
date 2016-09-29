@@ -1,4 +1,4 @@
-package com.catnbear.database.filter;
+package com.catnbear.utlilities.database;
 
 public class Filter {
     protected String columnName;

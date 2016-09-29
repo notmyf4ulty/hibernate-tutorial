@@ -1,9 +1,9 @@
-package com.catnbear.database.filter;
+package com.catnbear.model.filter;
 
-import com.catnbear.database.filter.Filter;
-import com.catnbear.database.filter.FiltersList;
-import com.catnbear.database.filter.NumericFilter;
-import com.catnbear.database.filter.StringFilter;
+import com.catnbear.utlilities.database.Filter;
+import com.catnbear.utlilities.database.FiltersList;
+import com.catnbear.utlilities.database.NumericFilter;
+import com.catnbear.utlilities.database.StringFilter;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

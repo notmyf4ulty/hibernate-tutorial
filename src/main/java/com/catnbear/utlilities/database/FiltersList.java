@@ -1,8 +1,8 @@
-package com.catnbear.database.filter;
+package com.catnbear.utlilities.database;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import static com.catnbear.database.filter.FiltersList.FilterListType.*;
+import static com.catnbear.utlilities.database.FiltersList.FilterListType.*;
 
 public class FiltersList {
 

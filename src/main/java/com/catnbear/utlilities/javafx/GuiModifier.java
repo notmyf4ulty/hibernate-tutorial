@@ -1,4 +1,4 @@
-package com.catnbear.utlilities;
+package com.catnbear.utlilities.javafx;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;

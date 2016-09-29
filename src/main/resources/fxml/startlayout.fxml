@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import com.catnbear.customcontrols.ImageButton?>
 
-<HBox fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.fxml.StartLayoutController">
+<HBox fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.controller.StartLayoutController">
     <VBox>
         <ImageButton url="/icon/add.png" onAction="#newAddButtonClicked"/>
         <ImageButton url="/icon/edit.png"/>
