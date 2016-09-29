@@ -57,7 +57,7 @@ public class StartLayoutController {
 
     @FXML
     private void newAddButtonClicked() {
-        GuiModifier.openNewWindow("/fxml/addentrybox.fxml",this);
+        GuiModifier.openNewWindow("/fxml/addnewitemdialog.fxml",this);
     }
 
     @FXML

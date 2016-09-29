@@ -1,7 +1,6 @@
 package com.catnbear.database;
 
 import com.catnbear.database.filter.FiltersList;
-import com.catnbear.database.query.InsertQuery;
 import com.catnbear.database.query.Query;
 import com.catnbear.database.table.TableCell;
 import javafx.scene.control.TableView;
