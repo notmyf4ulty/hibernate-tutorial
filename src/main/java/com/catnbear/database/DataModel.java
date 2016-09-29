@@ -30,7 +30,7 @@ public class DataModel {
 
     public void updateData() throws SQLException {
         Query query = new Query(databaseName,tableName);
-        tableView.setItems(BudgetItem.resultSetToList(query.selectAll()));
+        tableView.setItems(BudgetItem.resultSetToBudgetItemList(query.selectAll()));
     }
 
     public void addNewItem(List<TableCell> tableCellsList) throws SQLException {

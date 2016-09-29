@@ -12,34 +12,6 @@ import java.util.*;
 
 public class BudgetItem {
 
-    private static final String [] TABLE_COLUMNS_NAMES = {
-            "id",
-            "date",
-            "counterparty",
-            "category",
-            "subcategory",
-            "description",
-            "type",
-            "amount"
-    };
-
-    private static final int BUDGET_COLUMN_AMOUNT = TABLE_COLUMNS_NAMES.length;
-
-    private enum TableValidator {
-        TABLE_VALID("TABLE_VALID"),
-        TABLE_INVALID("TABLE_INVALID");
-
-        private final String fieldDescription;
-
-        TableValidator(String value) {
-            fieldDescription = value;
-        }
-
-        public String toString() {
-            return fieldDescription;
-        }
-    }
-
     private static final TableColumn ID_COLUMN = new TableColumn("id",0);
     private static final TableColumn DATE_COLUMN = new TableColumn("date",1);
     private static final TableColumn COUNTERPARTY_COLUMN = new TableColumn("counterparty",2);
@@ -48,6 +20,7 @@ public class BudgetItem {
     private static final TableColumn DESCRIPTION_COLUMN = new TableColumn("description",5);
     private static final TableColumn TYPE_COLUMN = new TableColumn("type",6);
     private static final TableColumn AMOUNT_COLUMN = new TableColumn("amount",7);
+
     private static final List<TableColumn> COLUMNS_LIST = new ArrayList<>(Arrays.asList(
             ID_COLUMN,
             DATE_COLUMN,
@@ -59,31 +32,26 @@ public class BudgetItem {
             AMOUNT_COLUMN
     ));
 
-    private final SimpleIntegerProperty id = new SimpleIntegerProperty(0);
-    private final SimpleStringProperty date = new SimpleStringProperty("");
-    private final SimpleStringProperty counterParty = new SimpleStringProperty("");
-    private final SimpleStringProperty category = new SimpleStringProperty("");
-    private final SimpleStringProperty subcategory = new SimpleStringProperty("");
-    private final SimpleStringProperty description = new SimpleStringProperty("");
-    private final SimpleStringProperty type = new SimpleStringProperty("");
-    private final SimpleDoubleProperty amount = new SimpleDoubleProperty(0.0);
+    private SimpleIntegerProperty id = new SimpleIntegerProperty(0);
+    private SimpleStringProperty date = new SimpleStringProperty("");
+    private SimpleStringProperty counterParty = new SimpleStringProperty("");
+    private SimpleStringProperty category = new SimpleStringProperty("");
+    private SimpleStringProperty subcategory = new SimpleStringProperty("");
+    private SimpleStringProperty description = new SimpleStringProperty("");
+    private SimpleStringProperty type = new SimpleStringProperty("");
+    private SimpleDoubleProperty amount = new SimpleDoubleProperty(0.0);
 
     public BudgetItem() {}
 
-    public BudgetItem(ResultSet resultSet) throws SQLException {
-        if (validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
-            id.set(resultSet.getInt(ID_COLUMN.getResultSetIndex()));
-            date.set(resultSet.getString(DATE_COLUMN.getResultSetIndex()));
-            counterParty.set(resultSet.getString(COUNTERPARTY_COLUMN.getResultSetIndex()));
-            category.set(resultSet.getString(CATEGORY_COLUMN.getResultSetIndex()));
-            subcategory.set(resultSet.getString(SUBCATEGORY_COLUMN.getResultSetIndex()));
-            description.set(resultSet.getString(DESCRIPTION_COLUMN.getResultSetIndex()));
-            type.set(resultSet.getString(TYPE_COLUMN.getResultSetIndex()));
-            amount.set(resultSet.getDouble(AMOUNT_COLUMN.getResultSetIndex()));
-        }
-        else {
-            System.out.println("En error occured during creation of the BudgetItem object.");
-        }
+    private BudgetItem(ResultSet resultSet) throws SQLException {
+        id.set(resultSet.getInt(ID_COLUMN.getResultSetIndex()));
+        date.set(resultSet.getString(DATE_COLUMN.getResultSetIndex()));
+        counterParty.set(resultSet.getString(COUNTERPARTY_COLUMN.getResultSetIndex()));
+        category.set(resultSet.getString(CATEGORY_COLUMN.getResultSetIndex()));
+        subcategory.set(resultSet.getString(SUBCATEGORY_COLUMN.getResultSetIndex()));
+        description.set(resultSet.getString(DESCRIPTION_COLUMN.getResultSetIndex()));
+        type.set(resultSet.getString(TYPE_COLUMN.getResultSetIndex()));
+        amount.set(resultSet.getDouble(AMOUNT_COLUMN.getResultSetIndex()));
     }
 
     public List<TableCell> toTableCellsList() {
@@ -98,40 +66,45 @@ public class BudgetItem {
         return tableCellsList;
     }
 
-    public static TableValidator validateTable(ResultSetMetaData resultSetMetaData) throws SQLException {
-        if (resultSetMetaData.getColumnCount() != BUDGET_COLUMN_AMOUNT) {
-            return TableValidator.TABLE_INVALID;
-        }
-        for (int columnIndex = 1; columnIndex <= BUDGET_COLUMN_AMOUNT; columnIndex++) {
-            if (!resultSetMetaData.getColumnName(columnIndex).equals(TABLE_COLUMNS_NAMES[columnIndex - 1])) {
-                return TableValidator.TABLE_INVALID;
-            }
-        }
-        return TableValidator.TABLE_VALID;
-    }
-
-    public static TableValidator validateTable(List<TableCell> tableCellsList) {
-        if (tableCellsList.size() != BUDGET_COLUMN_AMOUNT) {
-            return TableValidator.TABLE_INVALID;
-        }
-        for (int columnIndex = 0; columnIndex <= BUDGET_COLUMN_AMOUNT; columnIndex++) {
-            if(!tableCellsList.get(columnIndex).getColumnName().equals(TABLE_COLUMNS_NAMES[columnIndex])) {
-                return TableValidator.TABLE_INVALID;
-            }
-        }
-        return TableValidator.TABLE_VALID;
-    }
-
-    public static ObservableList<BudgetItem> resultSetToList(ResultSet resultSet) throws SQLException {
+    static ObservableList<BudgetItem> resultSetToBudgetItemList(ResultSet resultSet) throws SQLException {
         List<BudgetItem> budgetItemList = new ArrayList<>();
-
         if(validateTable(resultSet.getMetaData()).equals(TableValidator.TABLE_VALID)) {
             while (resultSet.next()) {
                 budgetItemList.add(new BudgetItem(resultSet));
             }
         }
-
         return FXCollections.observableArrayList(budgetItemList);
+    }
+
+    private static TableValidator validateTable(ResultSetMetaData resultSetMetaData) throws SQLException {
+        if (resultSetMetaData.getColumnCount() != COLUMNS_LIST.size()) {
+            return TableValidator.TABLE_INVALID;
+        }
+        String resultSetColumnName;
+        String tableColumnName;
+        for (TableColumn tableColumn : COLUMNS_LIST) {
+            resultSetColumnName = resultSetMetaData.getColumnName(tableColumn.getResultSetIndex());
+            tableColumnName = tableColumn.getColumnName();
+            if (!resultSetColumnName.equals(tableColumnName)) {
+                return TableValidator.TABLE_INVALID;
+            }
+        }
+        return TableValidator.TABLE_VALID;
+    }
+
+    private enum TableValidator {
+        TABLE_VALID("TABLE_VALID"),
+        TABLE_INVALID("TABLE_INVALID");
+
+        private final String fieldDescription;
+
+        TableValidator(String value) {
+            fieldDescription = value;
+        }
+
+        public String toString() {
+            return fieldDescription;
+        }
     }
 
     public int getId() {
