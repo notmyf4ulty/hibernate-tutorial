@@ -19,7 +19,7 @@
     <VBox fx:id="mainPane" >
         <TableView fx:id="tableView">
             <columns>
-                <TableColumn text="Id">
+                <TableColumn text="Id" visible="false">
                     <cellValueFactory>
                         <PropertyValueFactory property="id"/>
                     </cellValueFactory>
@@ -61,8 +61,5 @@
                 </TableColumn>
             </columns>
         </TableView>
-        <HBox>
-            <Button text="Show All Items" onAction="#onButtonAction"/>
-        </HBox>
     </VBox>
 </HBox>
