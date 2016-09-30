@@ -1,7 +1,4 @@
-.combo-box {
--fx-min-width: 100;
--fx-max-width: -fx-min-width;
-}
+
 
 .label {
 -fx-min-width: 100;

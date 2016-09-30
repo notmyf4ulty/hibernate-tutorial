@@ -12,7 +12,7 @@
       fx:controller="com.catnbear.controller.FiltersDialogController"
       stylesheets="@/css/filtersdialog.css">
     <HBox>
-        <TextField fx:id="categoryTextField"/>
+        <ComboBox fx:id="filtersComboBox"/>
         <TextField fx:id="valueTextField"/>
         <Button text="Add" onAction="#addFilterButtonClicked"/>
     </HBox>

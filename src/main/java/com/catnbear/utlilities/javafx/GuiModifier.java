@@ -1,5 +1,6 @@
 package com.catnbear.utlilities.javafx;
 
+import com.catnbear.utlilities.ResourceUtility;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -84,8 +85,10 @@ public class GuiModifier {
 
     public static void openNewWindow(String newWindowPath, Object callingController) {
         Parent root;
+        FXMLLoader loader = new FXMLLoader();
+        loader.setResources(ResourceUtility.TRANSLATION_BUNDLE_ENG);
         try {
-            root = FXMLLoader.load(callingController
+            root = loader.load(callingController
                     .getClass()
                     .getResource(newWindowPath));
             Stage stage = new Stage();
