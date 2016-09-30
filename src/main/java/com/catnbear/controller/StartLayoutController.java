@@ -12,8 +12,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.sql.*;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 public class StartLayoutController implements Observer {
 
@@ -25,7 +27,10 @@ public class StartLayoutController implements Observer {
 
     @FXML
     HBox rootPane;
-    
+
+    @FXML
+    private ResourceBundle resources;
+
     private DataModel dataModel;
 
 
@@ -33,6 +38,7 @@ public class StartLayoutController implements Observer {
     public void initialize() {
         dataModel = DataModel.getInstance();
         dataModel.setTableView(tableView);
+        resources = ResourceBundle.getBundle("bundles.UI_translation", new Locale("en","EN"));
     }
 
     public TableView<BudgetItem> getTableView() {

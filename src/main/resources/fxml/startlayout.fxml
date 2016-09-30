@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import com.catnbear.customcontrols.ImageButton?>
 
-<HBox fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.catnbear.controller.StartLayoutController">
+<HBox fx:id="rootPane"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.catnbear.controller.StartLayoutController">
     <VBox>
         <ImageButton url="/icon/add.png" onAction="#newAddButtonClicked"/>
         <ImageButton url="/icon/edit.png"/>
@@ -19,7 +21,7 @@
     <VBox fx:id="mainPane" >
         <TableView fx:id="tableView">
             <columns>
-                <TableColumn text="Id" visible="false">
+                <TableColumn text="dateColumnName" visible="false">
                     <cellValueFactory>
                         <PropertyValueFactory property="id"/>
                     </cellValueFactory>
