@@ -11,12 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-
 import java.io.IOException;
 
-/**
- * Created by przemek on 18.09.16.
- */
 public class ImageButton extends StackPane {
     @FXML
     private Button button;

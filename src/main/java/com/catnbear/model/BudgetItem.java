@@ -1,5 +1,6 @@
 package com.catnbear.model;
 
+import com.catnbear.utlilities.ResourceUtility;
 import com.catnbear.utlilities.database.TableCell;
 import com.catnbear.utlilities.database.TableColumn;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -12,14 +13,38 @@ import java.util.*;
 
 public class BudgetItem {
 
-    private static final TableColumn ID_COLUMN = new TableColumn("id",0);
-    private static final TableColumn DATE_COLUMN = new TableColumn("date",1);
-    private static final TableColumn COUNTERPARTY_COLUMN = new TableColumn("counterparty",2);
-    private static final TableColumn CATEGORY_COLUMN = new TableColumn("category",3);
-    private static final TableColumn SUBCATEGORY_COLUMN = new TableColumn("subcategory",4);
-    private static final TableColumn DESCRIPTION_COLUMN = new TableColumn("description",5);
-    private static final TableColumn TYPE_COLUMN = new TableColumn("type",6);
-    private static final TableColumn AMOUNT_COLUMN = new TableColumn("amount",7);
+    private static final ResourceBundle resource = ResourceUtility.TRANSLATION_BUNDLE_ENG;
+    private static final TableColumn ID_COLUMN = new TableColumn(
+            "id",
+            0);
+    private static final TableColumn DATE_COLUMN = new TableColumn(
+            "date",
+            resource.getString("dateColumnName"),
+            1);
+    private static final TableColumn COUNTERPARTY_COLUMN = new TableColumn(
+            "counterparty",
+            resource.getString("counterpartyColumnName"),
+            2);
+    private static final TableColumn CATEGORY_COLUMN = new TableColumn(
+            "category",
+            resource.getString("categoryColumnName"),
+            3);
+    private static final TableColumn SUBCATEGORY_COLUMN = new TableColumn(
+            "subcategory",
+            resource.getString("subcategoryColumnName"),
+            4);
+    private static final TableColumn DESCRIPTION_COLUMN = new TableColumn(
+            "description",
+            resource.getString("descriptionColumnName"),
+            5);
+    private static final TableColumn TYPE_COLUMN = new TableColumn(
+            "type",
+            resource.getString("typeColumnName"),
+            6);
+    private static final TableColumn AMOUNT_COLUMN = new TableColumn(
+            "amount",
+            resource.getString("amountColumnName"),
+            7);
 
     private static final List<TableColumn> COLUMNS_LIST = new ArrayList<>(Arrays.asList(
             ID_COLUMN,
@@ -105,6 +130,42 @@ public class BudgetItem {
         public String toString() {
             return fieldDescription;
         }
+    }
+
+    public static TableColumn getIdColumn() {
+        return ID_COLUMN;
+    }
+
+    public static TableColumn getDateColumn() {
+        return DATE_COLUMN;
+    }
+
+    public static TableColumn getCounterpartyColumn() {
+        return COUNTERPARTY_COLUMN;
+    }
+
+    public static TableColumn getCategoryColumn() {
+        return CATEGORY_COLUMN;
+    }
+
+    public static TableColumn getSubcategoryColumn() {
+        return SUBCATEGORY_COLUMN;
+    }
+
+    public static TableColumn getDescriptionColumn() {
+        return DESCRIPTION_COLUMN;
+    }
+
+    public static TableColumn getTypeColumn() {
+        return TYPE_COLUMN;
+    }
+
+    public static TableColumn getAmountColumn() {
+        return AMOUNT_COLUMN;
+    }
+
+    public static List<TableColumn> getColumnsList() {
+        return COLUMNS_LIST;
     }
 
     public int getId() {

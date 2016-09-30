@@ -2,6 +2,7 @@ package com.catnbear.controller;
 
 import com.catnbear.model.BudgetItem;
 import com.catnbear.model.DataModel;
+import com.catnbear.utlilities.ResourceUtility;
 import com.catnbear.utlilities.javafx.GuiModifier;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,7 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.sql.*;
-import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -38,7 +38,7 @@ public class StartLayoutController implements Observer {
     public void initialize() {
         dataModel = DataModel.getInstance();
         dataModel.setTableView(tableView);
-        resources = ResourceBundle.getBundle("bundles.UI_translation", new Locale("en","EN"));
+        resources = ResourceUtility.TRANSLATION_BUNDLE_ENG;
     }
 
     public TableView<BudgetItem> getTableView() {
